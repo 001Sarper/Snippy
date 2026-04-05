@@ -38,10 +38,13 @@ class Program
         string connectionsFilePath = Path.Combine(configDirectory, "ClientConnections.json");
         string preferencesFilePath = Path.Combine(configDirectory, "ClientPreferences.json");
         
-        string snippetsDirectory = Path.Combine(configDirectory, "Snippets");
+        string snippetsDirectory = Path.Combine(parentDirectory, "Snippets");
         Directory.CreateDirectory(snippetsDirectory);
         
-        string snippetsFilePath = Path.Combine(snippetsDirectory, "Snippets.json");
+        string snippetsFilePath = Path.Combine(snippetsDirectory, "SnippetList.json");
+        
+        string snippetFilesDirectory = Path.Combine(snippetsDirectory, "SnippetFiles");
+        Directory.CreateDirectory(snippetFilesDirectory);
         
 
 

@@ -7,23 +7,27 @@
              <Application.Resources>
                  <ResourceDictionary>
                      <ResourceDictionary.ThemeDictionaries>
-
                          <ResourceDictionary x:Key="Dark">
                              <Color x:Key="BackgroundColor">#0D1117</Color>
                              <Color x:Key="MenuColor">#0f1e2e</Color>
                              <Color x:Key="SnippetColor">#0a1628</Color>
+                             <Color x:Key="ViewButtonColor">#1a3a5c</Color>
+                             <Color x:Key="ExecuteButtonColor">#1a4a2e</Color>
                          </ResourceDictionary>
-                         
+
                          <ResourceDictionary x:Key="Light">
                              <Color x:Key="BackgroundColor">#e8f1fb</Color>
                              <Color x:Key="MenuColor">#c8ddf5</Color>
                              <Color x:Key="SnippetColor">#b0ceed</Color>
+                             <Color x:Key="ViewButtonColor">#4a90d9</Color>
+                             <Color x:Key="ExecuteButtonColor">#3a9e5f</Color>
                          </ResourceDictionary>
-
                      </ResourceDictionary.ThemeDictionaries>
                  </ResourceDictionary>
              </Application.Resources>
     <Application.Styles>
         <FluentTheme />
+        
+        <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
     </Application.Styles>
 </Application>

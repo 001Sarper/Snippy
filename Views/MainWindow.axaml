@@ -2,7 +2,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" CanResize="True"
         x:Class="Snippy.MainWindow"
         Title="Snippy">
         <Border Background="{DynamicResource BackgroundColor}">
@@ -11,9 +11,10 @@
                        <RowDefinition Height="25"/>
                        <RowDefinition Height="*"/>
                    </Grid.RowDefinitions>
-                   <Menu Grid.Row="0">
+                   <Menu Grid.Row="0" Background="{DynamicResource MenuColor}">
                        <MenuItem Header="File">
                            <MenuItem Header="Manage Hosts"/>
+                           <MenuItem Header="Manage Snippets" Click="ManageSnippetsMenuItem_OnClick"/>
                            <Separator/>
                            <MenuItem Header="Exit"/>
                        </MenuItem>
@@ -26,10 +27,14 @@
                            <MenuItem Header="GitHub"/>
                        </MenuItem>
                    </Menu>
-                   <Grid Grid.Row="1">
+                   <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">
                        <TabControl x:Name="TabController">
                            <TabItem Header="Snippets" FontWeight="DemiBold" FontSize="14" x:Name="SnippetHub">
-                               
+                               <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                   <StackPanel x:Name="SnippetList" Spacing="20">
+                                   
+                                   </StackPanel>
+                               </ScrollViewer>
                            </TabItem>
                        </TabControl>
                    </Grid>
