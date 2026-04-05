@@ -5,6 +5,7 @@
       <map>
         <entry key="App.axaml" value="Snippy.csproj" />
         <entry key="MainWindow.axaml" value="Snippy.csproj" />
+        <entry key="Views/MainWindow.axaml" value="Snippy.csproj" />
         <entry key="Windows/MainWindow.axaml" value="Snippy.csproj" />
       </map>
     </option>

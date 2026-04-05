@@ -8,7 +8,7 @@
         <Border Background="{DynamicResource BackgroundColor}">
                <Grid>
                    <Grid.RowDefinitions>
-                       <RowDefinition Height="50"/>
+                       <RowDefinition Height="25"/>
                        <RowDefinition Height="*"/>
                    </Grid.RowDefinitions>
                    <Menu Grid.Row="0">
@@ -17,10 +17,22 @@
                            <Separator/>
                            <MenuItem Header="Exit"/>
                        </MenuItem>
-                       <MenuItem>
-                           
+                       <MenuItem Header="View">
+                           <MenuItem Header="Preferences"/>
+                       </MenuItem>
+                       <MenuItem Header="About">
+                           <MenuItem Header="About Snippy"/>
+                           <Separator/>
+                           <MenuItem Header="GitHub"/>
                        </MenuItem>
                    </Menu>
+                   <Grid Grid.Row="1">
+                       <TabControl x:Name="TabController">
+                           <TabItem Header="Snippets" FontWeight="DemiBold" FontSize="14" x:Name="SnippetHub">
+                               
+                           </TabItem>
+                       </TabControl>
+                   </Grid>
                </Grid> 
         </Border>
 </Window>
