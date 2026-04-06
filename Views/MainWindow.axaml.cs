@@ -123,6 +123,8 @@ public partial class MainWindow : Window
         viewSnippetButton.Bind(Button.ForegroundProperty, viewSnippetButton.GetResourceObservable("ViewButtonTextColor"));
         viewSnippetButton.Bind(Button.BorderBrushProperty, viewSnippetButton.GetResourceObservable("ViewButtonBorderColor"));
 
+        viewSnippetButton.Click += ViewSnippetButton_OnClick;
+
         var executeSnippetButton = new Button
         {
             Content = "Execute",
@@ -157,6 +159,19 @@ public partial class MainWindow : Window
 
         border.Child = grid;
         SnippetList.Children.Add(border);
+    }
+
+    private async void ViewSnippetButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        var snippet = button.Tag as Snippet;
+        SnippetEditorWindow snippetEditorWindow = new SnippetEditorWindow(false, false, snippet);
+        snippetEditorWindow.SnippetNameTextBlock.IsReadOnly = true;
+        snippetEditorWindow.FileAuthorTextBlock.IsReadOnly = true;
+        snippetEditorWindow.FileDescriptionTextBlock.IsReadOnly = true;
+        snippetEditorWindow.BottomSeparator.IsVisible = false;
+        snippetEditorWindow.ButtonsGrid.IsVisible = false;
+        await snippetEditorWindow.ShowDialog(this);
     }
 
 
