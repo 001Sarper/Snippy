@@ -45,92 +45,118 @@ public partial class MainWindow : Window
         
     }
 
-    private void AddSnippet(Snippet snippet)
+    public void AddSnippet(Snippet snippet)
     {
         var border = new Border
         {
             CornerRadius = new CornerRadius(12),
-            Padding = new Thickness(16)
+            Width = 160,
+            Height = 220,
+            Padding = new Thickness(16),
+            BorderThickness = new Thickness(0.5)
         };
-        border.SetValue(Border.BackgroundProperty, new DynamicResourceExtension("SnippetColor"));
+        border[!Border.BackgroundProperty] = new DynamicResourceExtension("SnippetColor");
+        border[!Border.BorderBrushProperty] = new DynamicResourceExtension("SnippetBorderColor");
 
-        var grid = new Grid
-        {
-            Height = 120,
-            Width = 80
-        };
-        grid.RowDefinitions.Add(new RowDefinition(new GridLength(30)));
-        grid.RowDefinitions.Add(new RowDefinition(new GridLength(20)));
-        grid.RowDefinitions.Add(new RowDefinition(new GridLength(50)));
-        grid.RowDefinitions.Add(new RowDefinition(new GridLength(20)));
+        var grid = new Grid();
+        grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));     // Row 0 - Title + Separator
+        grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));     // Row 1 - Author
+        grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));     // Row 2 - Description
+        grid.RowDefinitions.Add(new RowDefinition(new GridLength(1, GridUnitType.Star))); // Row 3 - Spacer
+        grid.RowDefinitions.Add(new RowDefinition(GridLength.Auto));     // Row 4 - Buttons
 
         var titleTextBlock = new TextBlock
         {
             Text = snippet.Name,
+            Name = "TitleTextBlock-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Center,
-            VerticalAlignment = VerticalAlignment.Center,
-            FontWeight = FontWeight.Bold,
-            FontSize = 14
+            FontWeight = FontWeight.Medium,
+            FontSize = 14,
+            Margin = new Thickness(0, 0, 0, 8)
         };
+
+        var titleSeparator = new Border
+        {
+            BorderThickness = new Thickness(0, 0, 0, 0.5),
+            VerticalAlignment = VerticalAlignment.Bottom,
+            Margin = new Thickness(0, 0, 0, 8)
+        };
+        titleSeparator[!Border.BorderBrushProperty] = new DynamicResourceExtension("SnippetBorderColor");
 
         var authorTextBlock = new TextBlock
         {
             Text = "@" + snippet.Author,
+            Name = "AuthorTextBlock-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Left,
-            FontSize = 13
+            FontSize = 12,
+            Margin = new Thickness(0, 0, 0, 6)
         };
+        authorTextBlock[!TextBlock.ForegroundProperty] = new DynamicResourceExtension("AuthorTextColor");
 
         var descriptionTextBlock = new TextBlock
         {
             Text = snippet.Description,
+            Name = "DescriptionTextBlock-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Left,
-            FontSize = 11
+            FontSize = 11,
+            TextWrapping = TextWrapping.Wrap,
+            LineHeight = 17
         };
+        descriptionTextBlock[!TextBlock.ForegroundProperty] = new DynamicResourceExtension("SecondaryTextColor");
 
         var buttonsGrid = new Grid();
-        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(40)));
-        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(40)));
+        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(1, GridUnitType.Star)));
+        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(6)));
+        buttonsGrid.ColumnDefinitions.Add(new ColumnDefinition(new GridLength(1, GridUnitType.Star)));
 
         var viewSnippetButton = new Button
         {
-            Content = "View Snippet Content",
-            VerticalAlignment = VerticalAlignment.Center,
-            HorizontalAlignment = HorizontalAlignment.Center,
+            Content = "View",
+            Name = "ViewSnippetButton-" + snippet.Name,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            HorizontalContentAlignment = HorizontalAlignment.Center,
+            FontSize = 11,
+            Padding = new Thickness(0, 5, 0, 5),
             Tag = snippet
         };
-        viewSnippetButton.SetValue(Button.BackgroundProperty, "ViewButtonColor");
-        
+        viewSnippetButton.Bind(Button.BackgroundProperty, viewSnippetButton.GetResourceObservable("ViewButtonColor"));
+        viewSnippetButton.Bind(Button.ForegroundProperty, viewSnippetButton.GetResourceObservable("ViewButtonTextColor"));
+        viewSnippetButton.Bind(Button.BorderBrushProperty, viewSnippetButton.GetResourceObservable("ViewButtonBorderColor"));
+
         var executeSnippetButton = new Button
         {
-            Content = "Execute Snippet",
-            VerticalAlignment = VerticalAlignment.Center,
-            HorizontalAlignment = HorizontalAlignment.Center,
+            Content = "Execute",
+            Name = "ExecuteSnippetButton-" + snippet.Name,
+            HorizontalAlignment = HorizontalAlignment.Stretch,
+            HorizontalContentAlignment = HorizontalAlignment.Center,
+            FontSize = 11,
+            Padding = new Thickness(0, 5, 0, 5),
             Tag = snippet
         };
-        executeSnippetButton.SetValue(Button.BackgroundProperty, "ExecuteButtonColor");
-        
+        executeSnippetButton.Bind(Button.BackgroundProperty, executeSnippetButton.GetResourceObservable("ExecuteButtonColor"));
+        executeSnippetButton.Bind(Button.ForegroundProperty, executeSnippetButton.GetResourceObservable("ExecuteButtonTextColor"));
+        executeSnippetButton.Bind(Button.BorderBrushProperty, executeSnippetButton.GetResourceObservable("ExecuteButtonBorderColor"));
+
         Grid.SetColumn(viewSnippetButton, 0);
-        Grid.SetColumn(executeSnippetButton, 1);
-        
+        Grid.SetColumn(executeSnippetButton, 2);
+
         buttonsGrid.Children.Add(viewSnippetButton);
         buttonsGrid.Children.Add(executeSnippetButton);
-        
+
         Grid.SetRow(titleTextBlock, 0);
+        Grid.SetRow(titleSeparator, 0);
         Grid.SetRow(authorTextBlock, 1);
         Grid.SetRow(descriptionTextBlock, 2);
-        Grid.SetRow(buttonsGrid, 3);
-        
+        Grid.SetRow(buttonsGrid, 4);
+
         grid.Children.Add(titleTextBlock);
+        grid.Children.Add(titleSeparator);
         grid.Children.Add(authorTextBlock);
         grid.Children.Add(descriptionTextBlock);
         grid.Children.Add(buttonsGrid);
-        
+
         border.Child = grid;
-        
-        
-
-
-
+        SnippetList.Children.Add(border);
     }
 
 

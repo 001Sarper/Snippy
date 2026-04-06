@@ -19,7 +19,7 @@
                                 </MenuItem>
                         </Menu>
                         
-                        <StackPanel Grid.Row="1" x:Name="SnippetsList" Spacing="5" Margin="10,0,10,10">
+                        <StackPanel Grid.Row="1" x:Name="SnippetsList" Spacing="15" Margin="10">
                                                                 
                         </StackPanel>
                         

@@ -8,19 +8,35 @@
                  <ResourceDictionary>
                      <ResourceDictionary.ThemeDictionaries>
                          <ResourceDictionary x:Key="Dark">
-                             <Color x:Key="BackgroundColor">#0D1117</Color>
-                             <Color x:Key="MenuColor">#0f1e2e</Color>
-                             <Color x:Key="SnippetColor">#0a1628</Color>
-                             <Color x:Key="ViewButtonColor">#1a3a5c</Color>
-                             <Color x:Key="ExecuteButtonColor">#1a4a2e</Color>
+                             <SolidColorBrush x:Key="BackgroundColor">#0D1117</SolidColorBrush>
+                             <SolidColorBrush x:Key="MenuColor">#0f1e2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="SnippetColor">#0a1628</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonColor">#1a3a5c</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonColor">#1a4a2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonColor">#4a1a1a</SolidColorBrush>
+                             <SolidColorBrush x:Key="SnippetBorderColor">#2a2a2a</SolidColorBrush>
+                             <SolidColorBrush x:Key="AuthorTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="SecondaryTextColor">#888780</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonBorderColor">#2a5a6a</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonTextColor">#7ecf9e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonBorderColor">#2a6a3e</SolidColorBrush>
                          </ResourceDictionary>
 
                          <ResourceDictionary x:Key="Light">
-                             <Color x:Key="BackgroundColor">#e8f1fb</Color>
-                             <Color x:Key="MenuColor">#c8ddf5</Color>
-                             <Color x:Key="SnippetColor">#b0ceed</Color>
-                             <Color x:Key="ViewButtonColor">#4a90d9</Color>
-                             <Color x:Key="ExecuteButtonColor">#3a9e5f</Color>
+                             <SolidColorBrush x:Key="BackgroundColor">#e8f1fb</SolidColorBrush>
+                             <SolidColorBrush x:Key="MenuColor">#c8ddf5</SolidColorBrush>
+                             <SolidColorBrush x:Key="SnippetColor">#b0ceed</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonColor">#4a90d9</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonColor">#3a9e5f</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonColor">#c0392b</SolidColorBrush>
+                             <SolidColorBrush x:Key="SnippetBorderColor">#e0e0e0</SolidColorBrush>
+                             <SolidColorBrush x:Key="AuthorTextColor">#185FA5</SolidColorBrush>
+                             <SolidColorBrush x:Key="SecondaryTextColor">#5F5E5A</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonTextColor">#185FA5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonBorderColor">#85B7EB</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonTextColor">#3B6D11</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonBorderColor">#97C459</SolidColorBrush>
                          </ResourceDictionary>
                      </ResourceDictionary.ThemeDictionaries>
                  </ResourceDictionary>

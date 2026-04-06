@@ -31,7 +31,7 @@
                        <TabControl x:Name="TabController">
                            <TabItem Header="Snippets" FontWeight="DemiBold" FontSize="14" x:Name="SnippetHub">
                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                                   <StackPanel x:Name="SnippetList" Spacing="20">
+                                   <StackPanel x:Name="SnippetList" Spacing="20" Orientation="Horizontal" VerticalAlignment="Top">
                                    
                                    </StackPanel>
                                </ScrollViewer>
