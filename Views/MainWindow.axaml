@@ -16,15 +16,15 @@
                            <MenuItem Header="Manage Hosts"/>
                            <MenuItem Header="Manage Snippets" Click="ManageSnippetsMenuItem_OnClick"/>
                            <Separator/>
-                           <MenuItem Header="Exit"/>
+                           <MenuItem Header="Exit" Click="ExitMenuItem_OnClick"/>
                        </MenuItem>
                        <MenuItem Header="View">
-                           <MenuItem Header="Preferences"/>
+                           <MenuItem Header="Preferences" Click="PreferencesMenuItem_OnClick"/>
                        </MenuItem>
                        <MenuItem Header="About">
                            <MenuItem Header="About Snippy"/>
                            <Separator/>
-                           <MenuItem Header="GitHub"/>
+                           <MenuItem Header="GitHub" Click="OpenGithubMenuItem_OnClick"/>
                        </MenuItem>
                    </Menu>
                    <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">

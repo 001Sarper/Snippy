@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
 using Avalonia;
@@ -179,5 +180,25 @@ public partial class MainWindow : Window
     {
         ManageSnippetsWindow manageSnippetsWindow = new ManageSnippetsWindow();
         await manageSnippetsWindow.ShowDialog(this);
+    }
+
+    private async void PreferencesMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        PreferencesWindow preferencesWindow = new PreferencesWindow();
+        await preferencesWindow.ShowDialog(this);
+    }
+
+    private void ExitMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Environment.Exit(0);
+    }
+
+    private void OpenGithubMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        Process.Start(new ProcessStartInfo
+        {
+            UseShellExecute = true,
+            FileName = "https://github.com/001Sarper/Snippy"
+        });
     }
 }

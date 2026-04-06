@@ -1,0 +1,21 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="400" d:DesignHeight="300" Width="400" Height="300" CanResize="False"
+        x:Class="Snippy.Views.PreferencesWindow"
+        Title="Preferences">
+        <Border Background="{DynamicResource BackgroundColor}">
+                <StackPanel Spacing="10" Margin="16">
+                        <TextBlock Text="Theme"/>
+                        <ComboBox SelectedIndex="0" Name="ThemeSelection">
+                                <ComboBoxItem Content="Dark"/>
+                                <ComboBoxItem Content="Light"/>
+                        </ComboBox>
+                        <TextBlock Text="Font Size"/>
+                        <NumericUpDown Minimum="8" Maximum="32" Value="12" Increment="1" Name="FontSize"/>
+                
+                        <Button Content="Save" Background="{DynamicResource SaveButtonColor}" BorderBrush="{DynamicResource SaveButtonBorderColor}" Foreground="{DynamicResource SaveButtonTextColor}" HorizontalAlignment="Left" Click="Save_OnClick"/>
+                </StackPanel>
+        </Border>
+</Window>
