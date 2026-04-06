@@ -38,8 +38,8 @@
 
             <!-- Buttons -->
             <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto" x:Name="ButtonsGrid">
-                <Button Grid.Column="1" x:Name="CancelButton" Content="Cancel" Padding="16,8" CornerRadius="6" Margin="0,0,8,0" Click="CancelButton_OnClick"/>
-                <Button Grid.Column="2" x:Name="SaveButton" Content="Save" Padding="16,8" CornerRadius="6" Click="SaveButton_OnClick"/>
+                <Button Grid.Column="1" x:Name="CancelButton" Background="{DynamicResource CancelButtonColor}" BorderBrush="{DynamicResource CancelButtonBorderColor}" Foreground="{DynamicResource CancelButtonTextColor}" Content="Cancel" Padding="16,8" CornerRadius="6" Margin="0,0,8,0" Click="CancelButton_OnClick"/>
+                <Button Grid.Column="2" x:Name="SaveButton" Background="{DynamicResource SaveButtonColor}" BorderBrush="{DynamicResource SaveButtonBorderColor}" Foreground="{DynamicResource SaveButtonTextColor}" Content="Save" Padding="16,8" CornerRadius="6" Click="SaveButton_OnClick"/>
             </Grid>
 
         </Grid>

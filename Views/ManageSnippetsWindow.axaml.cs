@@ -86,10 +86,14 @@ public partial class ManageSnippetsWindow : Window
             Name =  "EditSnippetButton-" + snippet.Name,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Right,
+            Margin = new Thickness(0,0,5,0),
             Tag = (snippet, index)
         };
         editSnippetButton.Bind(Button.BackgroundProperty, 
-            editSnippetButton.GetResourceObservable("ViewButtonColor"));
+            editSnippetButton.GetResourceObservable("EditButtonColor"));
+        editSnippetButton.Bind(Button.ForegroundProperty, editSnippetButton.GetResourceObservable("EditButtonTextColor"));
+        editSnippetButton.Bind(Button.BorderBrushProperty, editSnippetButton.GetResourceObservable("EditButtonBorderColor"));
+        
         editSnippetButton.Click += EditSnippetButton_OnClick;
         
         var deleteSnippetButton = new Button
@@ -102,6 +106,9 @@ public partial class ManageSnippetsWindow : Window
         };
         deleteSnippetButton.Bind(Button.BackgroundProperty, 
             deleteSnippetButton.GetResourceObservable("DeleteButtonColor"));
+        deleteSnippetButton.Bind(Button.ForegroundProperty, deleteSnippetButton.GetResourceObservable("DeleteButtonTextColor"));
+        deleteSnippetButton.Bind(Button.BorderBrushProperty, deleteSnippetButton.GetResourceObservable("DeleteButtonBorderColor"));
+        
         deleteSnippetButton.Click += DeleteSnippetButton_OnClick;
         
         Grid.SetColumn(childGrid, 0);

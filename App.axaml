@@ -13,14 +13,32 @@
                              <SolidColorBrush x:Key="SnippetColor">#0a1628</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonColor">#1a3a5c</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonColor">#1a4a2e</SolidColorBrush>
-                             <SolidColorBrush x:Key="DeleteButtonColor">#4a1a1a</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="SnippetBorderColor">#2a2a2a</SolidColorBrush>
                              <SolidColorBrush x:Key="AuthorTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#888780</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="ViewButtonTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonBorderColor">#2a5a6a</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="ExecuteButtonTextColor">#7ecf9e</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonBorderColor">#2a6a3e</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="EditButtonColor">#1a3a4a</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonBorderColor">#2a5a6a</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="DeleteButtonColor">#4a1a1a</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonTextColor">#cf7e7e</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonBorderColor">#6a2a2a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="SaveButtonColor">#1a4a2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonTextColor">#7ecf9e</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonBorderColor">#2a6a3e</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="CancelButtonColor">#2a2a2a</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonTextColor">#888780</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonBorderColor">#3a3a3a</SolidColorBrush>
                          </ResourceDictionary>
 
                          <ResourceDictionary x:Key="Light">
@@ -29,7 +47,6 @@
                              <SolidColorBrush x:Key="SnippetColor">#b0ceed</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonColor">#4a90d9</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonColor">#3a9e5f</SolidColorBrush>
-                             <SolidColorBrush x:Key="DeleteButtonColor">#c0392b</SolidColorBrush>
                              <SolidColorBrush x:Key="SnippetBorderColor">#e0e0e0</SolidColorBrush>
                              <SolidColorBrush x:Key="AuthorTextColor">#185FA5</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#5F5E5A</SolidColorBrush>
@@ -37,6 +54,22 @@
                              <SolidColorBrush x:Key="ViewButtonBorderColor">#85B7EB</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonTextColor">#3B6D11</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonBorderColor">#97C459</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="EditButtonColor">#daeef7</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonTextColor">#185FA5</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonBorderColor">#85B7EB</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="DeleteButtonColor">#f7dada</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonTextColor">#A32D2D</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonBorderColor">#F09595</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="SaveButtonColor">#daf7e8</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonTextColor">#3B6D11</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonBorderColor">#97C459</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="CancelButtonColor">#f0f0f0</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonTextColor">#5F5E5A</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonBorderColor">#D3D1C7</SolidColorBrush>
                          </ResourceDictionary>
                      </ResourceDictionary.ThemeDictionaries>
                  </ResourceDictionary>
