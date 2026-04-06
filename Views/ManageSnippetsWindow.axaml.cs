@@ -82,7 +82,7 @@ public partial class ManageSnippetsWindow : Window
 
         var editSnippetButton = new Button
         {
-            Content = "Edit Snippet",
+            Content = "Edit",
             Name =  "EditSnippetButton-" + snippet.Name,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Right,
@@ -98,7 +98,7 @@ public partial class ManageSnippetsWindow : Window
         
         var deleteSnippetButton = new Button
         {
-            Content = "Delete Snippet",
+            Content = "Delete",
             Name =  "DeleteSnippetButton-" + snippet.Name,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Right,
