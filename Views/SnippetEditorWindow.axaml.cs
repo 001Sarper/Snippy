@@ -49,7 +49,7 @@ public partial class SnippetEditorWindow : Window
         // 2. Install TextMate support onto the editor
         _textMateInstallation = editor.InstallTextMate(_registryOptions);
 
-        // 3. Set the grammar for a specific language (e.g., C#)
+        // 3. Set the grammar for a specific language (e.g., Bash)
         var shellLanguage = _registryOptions.GetLanguageByExtension(".sh");
         string scopeName = _registryOptions.GetScopeByLanguageId(shellLanguage.Id);
 

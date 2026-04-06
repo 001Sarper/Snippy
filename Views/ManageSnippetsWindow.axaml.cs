@@ -7,6 +7,8 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+using MsBox.Avalonia;
+using MsBox.Avalonia.Enums;
 using Snippy.Models.FileManagment.Snippets;
 
 namespace Snippy.Views;
@@ -100,7 +102,7 @@ public partial class ManageSnippetsWindow : Window
         };
         deleteSnippetButton.Bind(Button.BackgroundProperty, 
             deleteSnippetButton.GetResourceObservable("DeleteButtonColor"));
-        editSnippetButton.Click += DeleteSnippetButton_OnClick;
+        deleteSnippetButton.Click += DeleteSnippetButton_OnClick;
         
         Grid.SetColumn(childGrid, 0);
         Grid.SetColumn(editSnippetButton, 1);
@@ -125,10 +127,28 @@ public partial class ManageSnippetsWindow : Window
 
     private async void DeleteSnippetButton_OnClick(object? sender, RoutedEventArgs e)
     {
-        var button  = sender as Button;
-        var (snippet, index) = ((Snippet, int))button.Tag;
-        
-        
+        var box = MessageBoxManager.GetMessageBoxStandard("Snipet Deletion",
+            "Are you sure you want to delete this snippet?", ButtonEnum.YesNo);
+        var result = await box.ShowAsync();
+
+        if (result == ButtonResult.Yes)
+        {
+            var button  = sender as Button;
+            var (snippet, index) = ((Snippet, int))button.Tag;
+
+            string json = File.ReadAllText(_snippetsFilePath);
+            SnippetManager snippetManager = JsonSerializer.Deserialize<SnippetManager>(json);
+            
+            snippetManager.Snippets.RemoveAll(s => s.Name == snippet.Name);
+            
+            string newJson = JsonSerializer.Serialize(snippetManager);
+            File.WriteAllText(_snippetsFilePath, newJson);
+            
+            SnippetsList.Children.RemoveAt(index);
+            MainWindow.Instance.SnippetList.Children.RemoveAt(index);
+        }
+
+
     }
 
     private async void OpenEditor_OnClick(object? sender, RoutedEventArgs e)
