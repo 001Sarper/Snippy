@@ -10,17 +10,29 @@
                          <ResourceDictionary x:Key="Dark">
                              <SolidColorBrush x:Key="BackgroundColor">#0D1117</SolidColorBrush>
                              <SolidColorBrush x:Key="MenuColor">#0f1e2e</SolidColorBrush>
-                             <SolidColorBrush x:Key="SnippetColor">#0a1628</SolidColorBrush>
-                             <SolidColorBrush x:Key="ViewButtonColor">#1a3a5c</SolidColorBrush>
-                             <SolidColorBrush x:Key="ExecuteButtonColor">#1a4a2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConnectionListColor">#111827</SolidColorBrush>
                              
+                             <SolidColorBrush x:Key="SnippetColor">#0a1628</SolidColorBrush>
                              <SolidColorBrush x:Key="SnippetBorderColor">#2a2a2a</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="AuthorTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#888780</SolidColorBrush>
                              
+                             
+                             <!-- Button Colors -->
+                             <SolidColorBrush x:Key="ShowPasswordButtonColor">#1a2a3a</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonBorderColor">#2a4a5a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="AddButtonColor">#1a4a5c</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonTextColor">#7ef0ef</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonBorderColor">#2a7a8a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ViewButtonColor">#1a3a5c</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonBorderColor">#2a5a6a</SolidColorBrush>
                              
+                             <SolidColorBrush x:Key="ExecuteButtonColor">#1a4a2e</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonTextColor">#7ecf9e</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonBorderColor">#2a6a3e</SolidColorBrush>
                              
@@ -44,14 +56,29 @@
                          <ResourceDictionary x:Key="Light">
                              <SolidColorBrush x:Key="BackgroundColor">#e8f1fb</SolidColorBrush>
                              <SolidColorBrush x:Key="MenuColor">#c8ddf5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConnectionListColor">#F3F6FA</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="SnippetColor">#b0ceed</SolidColorBrush>
-                             <SolidColorBrush x:Key="ViewButtonColor">#4a90d9</SolidColorBrush>
-                             <SolidColorBrush x:Key="ExecuteButtonColor">#3a9e5f</SolidColorBrush>
                              <SolidColorBrush x:Key="SnippetBorderColor">#e0e0e0</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="AuthorTextColor">#185FA5</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#5F5E5A</SolidColorBrush>
+                             
+                             
+                             <!-- Button Colors -->
+                             <SolidColorBrush x:Key="ShowPasswordButtonColor">#daeaf8</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonTextColor">#185fa5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonBorderColor">#85b7eb</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="AddButtonColor">#cce8f4</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonTextColor">#0a5a8a</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonBorderColor">#85c4e0</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ViewButtonColor">#4a90d9</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonTextColor">#185FA5</SolidColorBrush>
                              <SolidColorBrush x:Key="ViewButtonBorderColor">#85B7EB</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ExecuteButtonColor">#3a9e5f</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonTextColor">#3B6D11</SolidColorBrush>
                              <SolidColorBrush x:Key="ExecuteButtonBorderColor">#97C459</SolidColorBrush>
                              

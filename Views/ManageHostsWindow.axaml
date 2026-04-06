@@ -1,0 +1,71 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="700" d:DesignHeight="500" Width="800" Height="500"
+        x:Class="Snippy.Views.ManageHostsWindow"
+        Title="Manage Hosts">
+        <Border Background="{DynamicResource BackgroundColor}">
+                <Grid>
+                        <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="300"/>
+                                <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" x:Name="Sidebar" Background="{DynamicResource ConnectionListColor}">
+                                <Grid.RowDefinitions>
+                                        <RowDefinition Height="*"/>
+                                        <RowDefinition Height="50"/>
+                                </Grid.RowDefinitions>
+                                <StackPanel Grid.Row="0" x:Name="ParentPanel" Orientation="Vertical" Spacing="10" Margin="10">
+                                        
+                                </StackPanel>
+                                <Grid Grid.Row="1" Margin="10">
+                                        <Button Content="Add connection" Click="AddConnection_OnClick" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Background="{DynamicResource AddButtonColor}" BorderBrush="{DynamicResource AddButtonBorderColor}" Foreground="{DynamicResource AddButtonTextColor}" Height="35" VerticalAlignment="Center"/>
+                                                
+                                </Grid>
+                        </Grid>
+                        <Grid Grid.Column="1" Background="{DynamicResource BackgroundColor}">
+                                <StackPanel Spacing="10" Margin="16" x:Name="BoxPanel" IsVisible="False">
+                                        <TextBlock Text="Host Name"/>
+                                        <TextBox Watermark="Debian Server" x:Name="NameTextBox"/>
+                                        <TextBlock Text="Host"/>
+                                        <TextBox Watermark="192.168.178.43" x:Name="HostTextBox"/>
+                                        <TextBlock Text="Port"/>
+                                        <TextBox Watermark="22" x:Name="PortTextBox"/>
+                                        <TextBlock Text="Username"/>
+                                        <TextBox Watermark="root" x:Name="UserTextBox"/>
+                                        <TextBlock Text="Authentication Method"/>
+                                        <ComboBox SelectedIndex="0" Name="AuthSelection" SelectionChanged="AuthSelection_OnSelectionChanged">
+                                                <ComboBoxItem Content="Password Authentication"/>
+                                                <ComboBoxItem Content="Private Key Authentication"/>
+                                        </ComboBox>
+                                        <Grid IsVisible="True" x:Name="PasswordAuth">
+                                                <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="*"/>
+                                                        <ColumnDefinition Width="Auto"/>
+                                                </Grid.ColumnDefinitions>
+                                                <TextBox Grid.Column="0" Watermark="iLoveAdmins" PasswordChar="•" x:Name="PasswordTextBox"/>
+                                                <Button Grid.Column="1" Background="{DynamicResource ShowPasswordButtonColor}" BorderBrush="{DynamicResource ShowPasswordButtonBorderColor}" Foreground="{DynamicResource ShowPasswordButtonTextColor}" Content="Show Password" Margin="10, 0,0,0" Click="ShowPasswordButton_OnClick" Tag="PasswordAuth"/>
+                                        </Grid>
+                                        <StackPanel Orientation="Vertical" x:Name="PrivateKeyAuth" IsVisible="False" Spacing="10">
+                                                <StackPanel Orientation="Horizontal" Spacing="10">
+                                                        <Button Content="Select Private Key" Height="30" Click="PickPrivateKey_OnClick"/>
+                                                        <TextBox x:Name="PrivateKeyPathBox" IsReadOnly="True" Watermark="No file selected" Height="30"/>
+                                                </StackPanel>
+                                                <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="*"/>
+                                                                <ColumnDefinition Width="Auto"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBox Grid.Column="0" Watermark="Passphrase (optional)" PasswordChar="•" x:Name="PassphraseTextBox"/>
+                                                        <Button Grid.Column="1" Background="{DynamicResource ShowPasswordButtonColor}" BorderBrush="{DynamicResource ShowPasswordButtonBorderColor}" Foreground="{DynamicResource ShowPasswordButtonTextColor}" Content="Show Password" Margin="10, 0,0,0" Click="ShowPasswordButton_OnClick" Tag="PrivAuth"/>
+                                                </Grid>
+                                        </StackPanel>
+                                        
+                
+                                        <Button x:Name="BoxPanelButton" Content="" Margin="0, 20, 0,0"/>
+                                </StackPanel>
+                        </Grid>
+                </Grid>
+        </Border>
+</Window>

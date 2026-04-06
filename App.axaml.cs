@@ -3,6 +3,7 @@ using System.IO;
 using System.Text.Json;
 using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
+using Microsoft.AspNetCore.DataProtection;
 using Avalonia.Markup.Xaml;
 using Avalonia.Styling;
 using Org.BouncyCastle.Math.EC;
@@ -12,12 +13,24 @@ namespace Snippy;
 
 public partial class App : Application
 {
+    public IDataProtector Protector { get; private set; }
     public static App Instance { get; private set; }
     
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
         Instance = this;
+        
+        var keysDirectory = new DirectoryInfo(
+            Path.Combine(AppContext.BaseDirectory, "dataprotection-keys")
+        );
+
+        var provider = DataProtectionProvider.Create(
+            keysDirectory,
+            options => options.SetApplicationName("Snippy")
+        );
+
+        Protector = provider.CreateProtector("Connections");
     }
 
     public override void OnFrameworkInitializationCompleted()

@@ -13,7 +13,7 @@
                    </Grid.RowDefinitions>
                    <Menu Grid.Row="0" Background="{DynamicResource MenuColor}">
                        <MenuItem Header="File">
-                           <MenuItem Header="Manage Hosts"/>
+                           <MenuItem Header="Manage Hosts" Click="ManageHostsMenuItem_OnClick"/>
                            <MenuItem Header="Manage Snippets" Click="ManageSnippetsMenuItem_OnClick"/>
                            <Separator/>
                            <MenuItem Header="Exit" Click="ExitMenuItem_OnClick"/>
@@ -31,7 +31,7 @@
                        <TabControl x:Name="TabController">
                            <TabItem Header="Snippets" FontWeight="DemiBold" FontSize="14" x:Name="SnippetHub">
                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
-                                   <StackPanel x:Name="SnippetList" Spacing="20" Orientation="Horizontal" VerticalAlignment="Top">
+                                   <StackPanel x:Name="SnippetList" Spacing="20" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10,0,10">
                                    
                                    </StackPanel>
                                </ScrollViewer>

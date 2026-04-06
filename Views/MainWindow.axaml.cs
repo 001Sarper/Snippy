@@ -201,4 +201,10 @@ public partial class MainWindow : Window
             FileName = "https://github.com/001Sarper/Snippy"
         });
     }
+
+    private async void ManageHostsMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ManageHostsWindow manageHostsWindow = new ManageHostsWindow();
+        await manageHostsWindow.ShowDialog(this);
+    }
 }
