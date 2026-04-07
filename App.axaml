@@ -18,11 +18,16 @@
                              <SolidColorBrush x:Key="AuthorTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#888780</SolidColorBrush>
                              
-                             <SolidColorBrush x:Key="ServerListSectionBackground">#1E1E2F</SolidColorBrush>
-                             <SolidColorBrush x:Key="ServerListSectionBorder">#3A3A50</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBackground">#111d2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBorder">#1e3a52</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListStackPanelBackground">#0d1520</SolidColorBrush>
                              
                              
                              <!-- Button Colors -->
+                             <SolidColorBrush x:Key="ConfirmButtonColor">#1a3a5c</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonBorderColor">#2a5a8a</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="ShowPasswordButtonColor">#1a2a3a</SolidColorBrush>
                              <SolidColorBrush x:Key="ShowPasswordButtonTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="ShowPasswordButtonBorderColor">#2a4a5a</SolidColorBrush>
@@ -67,11 +72,16 @@
                              <SolidColorBrush x:Key="AuthorTextColor">#185FA5</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#5F5E5A</SolidColorBrush>
                              
-                             <SolidColorBrush x:Key="ServerListSectionBackground">#F2F2F5</SolidColorBrush>
-                             <SolidColorBrush x:Key="ServerListSectionBorder">#D1D1D6</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBackground">#dce8f5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBorder">#a8c4e0</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListStackPanelBackground">#f0f6fc</SolidColorBrush>
                              
                              
                              <!-- Button Colors -->
+                             <SolidColorBrush x:Key="ConfirmButtonColor">#1a6aad</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonTextColor">#ffffff</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonBorderColor">#1050a0</SolidColorBrush>
+                             
                              <SolidColorBrush x:Key="ShowPasswordButtonColor">#daeaf8</SolidColorBrush>
                              <SolidColorBrush x:Key="ShowPasswordButtonTextColor">#185fa5</SolidColorBrush>
                              <SolidColorBrush x:Key="ShowPasswordButtonBorderColor">#85b7eb</SolidColorBrush>

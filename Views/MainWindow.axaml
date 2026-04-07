@@ -46,13 +46,13 @@
                        
                        <GridSplitter x:Name="ConnectionListSplitter" IsVisible="false" Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" />
                        
-                       <Grid x:Name="ConnectionList" IsVisible="false" Grid.Column="2" RowDefinitions="*,Auto,Auto" Background="{DynamicResource ConnectionListColor}">
+                       <Grid x:Name="ConnectionList" IsVisible="false" Grid.Column="2" RowDefinitions="*,Auto,Auto" Background="{DynamicResource ServerListStackPanelBackground}">
                            <StackPanel Grid.Row="0" x:Name="ServerSelectionSection" Spacing="10" Orientation="Vertical" HorizontalAlignment="Stretch">
                                
                            </StackPanel>
                            
                            <Separator Grid.Row="1"/>
-                           <Button Grid.Row="2" Content="Confirm" Click="ConfirmServersButton_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2" Height="30" Width="80"/>
+                           <Button Grid.Row="2" Content="Confirm" Click="ConfirmServersButton_OnClick" Background="{DynamicResource ConfirmButtonColor}" BorderBrush="{DynamicResource ConfirmButtonBorderColor}" Foreground="{DynamicResource ConfirmButtonTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2" Height="30" Width="80"/>
                        </Grid>
                        
                    </Grid>

@@ -129,6 +129,7 @@ public partial class ManageSnippetsWindow : Window
         var (snippet, index) = ((Snippet, int))button.Tag;
         
         SnippetEditorWindow editorWindow = new SnippetEditorWindow(false, true, snippet,  index);
+        editorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         await editorWindow.ShowDialog(this);
     }
 
