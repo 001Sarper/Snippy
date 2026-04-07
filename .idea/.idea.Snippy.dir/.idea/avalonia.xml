@@ -9,6 +9,7 @@
         <entry key="Views/ManageHostsWindow.axaml" value="Snippy.csproj" />
         <entry key="Views/ManageSnippetsWindow.axaml" value="Snippy.csproj" />
         <entry key="Views/PreferencesWindow.axaml" value="Snippy.csproj" />
+        <entry key="Views/ServerSelectionWindow.axaml" value="Snippy.csproj" />
         <entry key="Views/SnippetEditorWindow.axaml" value="Snippy.csproj" />
         <entry key="Windows/MainWindow.axaml" value="Snippy.csproj" />
       </map>

@@ -28,7 +28,13 @@
                        </MenuItem>
                    </Menu>
                    <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">
-                       <TabControl x:Name="TabController">
+                       <Grid.ColumnDefinitions>
+                           <ColumnDefinition Width="*"/>
+                           <ColumnDefinition Width="Auto"/>
+                           <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="350"/>
+                       </Grid.ColumnDefinitions>
+                       
+                       <TabControl Grid.Column="0" x:Name="TabController">
                            <TabItem Header="Snippets" FontWeight="DemiBold" FontSize="14" x:Name="SnippetHub">
                                <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
                                    <StackPanel x:Name="SnippetList" Spacing="20" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10,0,10">
@@ -37,6 +43,18 @@
                                </ScrollViewer>
                            </TabItem>
                        </TabControl>
+                       
+                       <GridSplitter x:Name="ConnectionListSplitter" IsVisible="false" Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" />
+                       
+                       <Grid x:Name="ConnectionList" IsVisible="false" Grid.Column="2" RowDefinitions="*,Auto,Auto" Background="{DynamicResource ConnectionListColor}">
+                           <StackPanel Grid.Row="0" x:Name="ServerSelectionSection" Spacing="10" Orientation="Vertical" HorizontalAlignment="Stretch">
+                               
+                           </StackPanel>
+                           
+                           <Separator Grid.Row="1"/>
+                           <Button Grid.Row="2" Content="Confirm" Click="ConfirmServersButton_OnClick" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2" Height="30" Width="80"/>
+                       </Grid>
+                       
                    </Grid>
                </Grid> 
         </Border>

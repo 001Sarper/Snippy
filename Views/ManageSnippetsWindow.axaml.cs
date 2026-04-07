@@ -20,9 +20,9 @@ public partial class ManageSnippetsWindow : Window
     private static readonly string _configDirectory = Path.Combine(_parentDirectory, "Config");
     private static readonly string _snippetsDirectory = Path.Combine(_parentDirectory, "Snippets");
     
-    private static readonly string _connectionsFilePath = Path.Combine(_configDirectory, "ClientConnections.json");
     
     private static readonly string _snippetsFilePath = Path.Combine(_snippetsDirectory, "SnippetList.json");
+    private static readonly string _snippetFilesDirectory = Path.Combine(_snippetsDirectory, "SnippetFiles");
     
     public static ManageSnippetsWindow? Instance { get; private set; }
     
@@ -146,7 +146,10 @@ public partial class ManageSnippetsWindow : Window
             string json = File.ReadAllText(_snippetsFilePath);
             SnippetManager snippetManager = JsonSerializer.Deserialize<SnippetManager>(json);
             
+            string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
+            
             snippetManager.Snippets.RemoveAll(s => s.Name == snippet.Name);
+            File.Delete(filePath);
             
             string newJson = JsonSerializer.Serialize(snippetManager);
             File.WriteAllText(_snippetsFilePath, newJson);
@@ -161,6 +164,7 @@ public partial class ManageSnippetsWindow : Window
     private async void OpenEditor_OnClick(object? sender, RoutedEventArgs e)
     {
         SnippetEditorWindow editorWindow = new SnippetEditorWindow(true, false);
+        editorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         await editorWindow.ShowDialog(this);
     }
 }

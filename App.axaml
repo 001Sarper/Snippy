@@ -18,6 +18,9 @@
                              <SolidColorBrush x:Key="AuthorTextColor">#7ecfef</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#888780</SolidColorBrush>
                              
+                             <SolidColorBrush x:Key="ServerListSectionBackground">#1E1E2F</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBorder">#3A3A50</SolidColorBrush>
+                             
                              
                              <!-- Button Colors -->
                              <SolidColorBrush x:Key="ShowPasswordButtonColor">#1a2a3a</SolidColorBrush>
@@ -63,6 +66,9 @@
                              
                              <SolidColorBrush x:Key="AuthorTextColor">#185FA5</SolidColorBrush>
                              <SolidColorBrush x:Key="SecondaryTextColor">#5F5E5A</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ServerListSectionBackground">#F2F2F5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBorder">#D1D1D6</SolidColorBrush>
                              
                              
                              <!-- Button Colors -->

@@ -121,7 +121,7 @@ public partial class SnippetEditorWindow : Window
         
         if (_isNewFile && !string.IsNullOrWhiteSpace(editor.Text) && !string.IsNullOrWhiteSpace(SnippetNameTextBlock.Text) && !string.IsNullOrWhiteSpace(FileAuthorTextBlock.Text))
         {
-            string filePath = Path.Combine(_snippetFilesDirectory, SnippetNameTextBlock.Text);
+            string filePath = Path.Combine(_snippetFilesDirectory, SnippetNameTextBlock.Text + ".sh");
             var box = MessageBoxManager.GetMessageBoxStandard("Success", "New Snippet was added successfully.", ButtonEnum.Ok);
             
             File.WriteAllText(filePath, editor.Text, Encoding.UTF8);

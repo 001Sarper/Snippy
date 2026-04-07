@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
@@ -8,6 +9,7 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
+using MsBox.Avalonia;
 using Snippy.Models.FileManagment.Config;
 using Snippy.Models.FileManagment.Snippets;
 using Snippy.Views;
@@ -24,6 +26,8 @@ public partial class MainWindow : Window
     private static readonly string _connectionsFilePath = Path.Combine(_configDirectory, "ClientConnections.json");
     
     private static readonly string _snippetsFilePath = Path.Combine(_snippetsDirectory, "SnippetList.json");
+
+    private List<ClientConnection> _checkedServers = new List<ClientConnection>();
     
     public static MainWindow? Instance { get; private set; }
     
@@ -35,13 +39,14 @@ public partial class MainWindow : Window
 
         if (File.Exists(_snippetsFilePath))
         {
-            string json = File.ReadAllText(_snippetsFilePath);
-            SnippetManager? snippets = JsonSerializer.Deserialize<SnippetManager>(json);
+            string snippetsJson = File.ReadAllText(_snippetsFilePath);
+            SnippetManager? snippetManager = JsonSerializer.Deserialize<SnippetManager>(snippetsJson);
 
-            foreach (var snippet in snippets.Snippets)
+            foreach (var snippet in snippetManager.Snippets)
             {
                 AddSnippet(snippet);
             }
+            
         }
         
     }
@@ -54,7 +59,7 @@ public partial class MainWindow : Window
             Width = 160,
             Height = 220,
             Padding = new Thickness(16),
-            BorderThickness = new Thickness(0.5)
+            BorderThickness = new Thickness(1)
         };
         border[!Border.BackgroundProperty] = new DynamicResourceExtension("SnippetColor");
         border[!Border.BorderBrushProperty] = new DynamicResourceExtension("SnippetBorderColor");
@@ -140,6 +145,8 @@ public partial class MainWindow : Window
         executeSnippetButton.Bind(Button.ForegroundProperty, executeSnippetButton.GetResourceObservable("ExecuteButtonTextColor"));
         executeSnippetButton.Bind(Button.BorderBrushProperty, executeSnippetButton.GetResourceObservable("ExecuteButtonBorderColor"));
 
+        executeSnippetButton.Click += ExecuteSnippetButton_OnClick;
+        
         Grid.SetColumn(viewSnippetButton, 0);
         Grid.SetColumn(executeSnippetButton, 2);
 
@@ -162,11 +169,83 @@ public partial class MainWindow : Window
         SnippetList.Children.Add(border);
     }
 
+    private void ExecuteSnippetButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var button = sender as Button;
+        var snippet = button.Tag as Snippet;
+        
+        if (File.Exists(_connectionsFilePath))
+        {
+            string connectionsJson = File.ReadAllText(_connectionsFilePath);
+            ConfigManager? configManager = JsonSerializer.Deserialize<ConfigManager>(connectionsJson);
+        
+            foreach (var connection in configManager.ClientConnections)
+            {
+                AddConnection(connection);
+            }
+        }
+
+        ConnectionListSplitter.IsVisible = true;
+        ConnectionList.IsVisible = true;
+    }
+
+    private void AddConnection(ClientConnection connection)
+    {
+        var border = new Border
+        {
+            CornerRadius = new CornerRadius(12),
+            Margin = new Thickness(5),
+            HorizontalAlignment =  HorizontalAlignment.Stretch,
+            Height = 40,
+            Padding = new Thickness(2),
+            BorderThickness = new Thickness(1),
+            VerticalAlignment = VerticalAlignment.Top,
+        };
+        border[!BackgroundProperty] = new DynamicResourceExtension("ServerListSectionBackground");
+        border[!BorderBrushProperty] = new DynamicResourceExtension("ServerListSectionBorder");
+        
+        
+        var grid = new Grid();
+        grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Star));
+        grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+        grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
+        
+        
+        var textblock = new TextBlock{Text = connection.Name, VerticalAlignment = VerticalAlignment.Center, FontSize = 14, Margin=new Thickness(5,0,0,0)};
+        var checkbox = new CheckBox
+        {
+            Tag = connection
+        };
+        checkbox.IsCheckedChanged += CheckboxOnIsCheckedChanged;
+        
+        
+        Grid.SetColumn(textblock, 0);
+        Grid.SetColumn(checkbox, 2);
+        
+        grid.Children.Add(textblock);
+        grid.Children.Add(checkbox);
+        border.Child = grid;
+        ServerSelectionSection.Children.Add(border);
+        
+        
+        
+    }
+
+    private void CheckboxOnIsCheckedChanged(object? sender, RoutedEventArgs e)
+    {
+        var checkbox = sender as CheckBox;
+        var connection = checkbox.Tag as ClientConnection;
+        bool isChecked = checkbox.IsChecked ?? false;
+        if (isChecked) _checkedServers.Add(connection); else _checkedServers.Remove(connection);
+    }
+
+
     private async void ViewSnippetButton_OnClick(object? sender, RoutedEventArgs e)
     {
         var button = sender as Button;
         var snippet = button.Tag as Snippet;
         SnippetEditorWindow snippetEditorWindow = new SnippetEditorWindow(false, false, snippet);
+        snippetEditorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         snippetEditorWindow.SnippetNameTextBlock.IsReadOnly = true;
         snippetEditorWindow.FileAuthorTextBlock.IsReadOnly = true;
         snippetEditorWindow.FileDescriptionTextBlock.IsReadOnly = true;
@@ -206,5 +285,21 @@ public partial class MainWindow : Window
     {
         ManageHostsWindow manageHostsWindow = new ManageHostsWindow();
         await manageHostsWindow.ShowDialog(this);
+    }
+
+    private async void ConfirmServersButton_OnClick(object? sender, RoutedEventArgs e)
+    {
+        if (_checkedServers.Count > 0)
+        {
+            foreach (var server in _checkedServers)
+            {
+                Console.WriteLine("Checked: " + server.Name);
+            }
+        }
+        else
+        {
+            var box = MessageBoxManager.GetMessageBoxStandard("Error", "There were no servers selected!");
+            await box.ShowAsync();
+        }
     }
 }
