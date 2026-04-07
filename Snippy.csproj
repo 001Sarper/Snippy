@@ -5,8 +5,8 @@
     <Nullable>enable</Nullable>
     <ApplicationManifest>app.manifest</ApplicationManifest>
     <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <CefGlueVersion>120.6099.211</CefGlueVersion>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.3.12" />
     <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.4.1" />
@@ -19,28 +19,35 @@
       <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
     </PackageReference>
     <PackageReference Include="AvaloniaEdit.TextMate" Version="11.4.1" />
-    <PackageReference Include="CefGlue.Avalonia" Version="120.6099.211" />
-    <PackageReference Include="CefGlue.Common" Version="120.6099.211" />
+    <PackageReference Include="CefGlue.Avalonia" Version="$(CefGlueVersion)" />
+    <PackageReference Include="CefGlue.Common" Version="$(CefGlueVersion)" />
     <PackageReference Include="MessageBox.Avalonia" Version="3.3.1.1" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="10.0.5" />
     <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="10.0.5" />
     <PackageReference Include="SSH.NET" Version="2025.1.0" />
     <PackageReference Include="WebViewControl-Avalonia" Version="3.120.11" />
   </ItemGroup>
-
   <ItemGroup>
     <Compile Update="Windows\MainWindow.axaml.cs">
       <DependentUpon>MainWindow.axaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
-
   <ItemGroup>
     <None Remove="Assets\Images\deleteIcon.png" />
     <None Remove="Assets\Images\editIcon.png" />
   </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Assets\" />
   </ItemGroup>
+
+  <Target Name="CopyCefGlueBrowserProcess" AfterTargets="Publish">
+    <ItemGroup>
+      <CefGlueFiles Include="$(NuGetPackageRoot)cefglue.common/$(CefGlueVersion)/bin/linux-x64/*" />
+    </ItemGroup>
+    <Copy
+            SourceFiles="@(CefGlueFiles)"
+            DestinationFolder="$(PublishDir)CefGlueBrowserProcess" />
+  </Target>
+
 </Project>

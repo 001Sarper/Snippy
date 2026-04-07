@@ -21,10 +21,11 @@ public partial class App : Application
         AvaloniaXamlLoader.Load(this);
         Instance = this;
         
-        var keysDirectory = new DirectoryInfo(
-            Path.Combine(AppContext.BaseDirectory, "dataprotection-keys")
-        );
+        string appData = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData);
+        string configDir = Path.Combine(appData, "Snippy");
 
+        var keysDirectory = new DirectoryInfo(Path.Combine(configDir, "dataprotection-keys"));
+        
         var provider = DataProtectionProvider.Create(
             keysDirectory,
             options => options.SetApplicationName("Snippy")
