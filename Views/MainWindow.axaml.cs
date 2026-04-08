@@ -173,6 +173,8 @@ public partial class MainWindow : Window
     {
         var button = sender as Button;
         var snippet = button.Tag as Snippet;
+
+        ServerSelectionSection.Children.Clear();
         
         if (File.Exists(_connectionsFilePath))
         {
