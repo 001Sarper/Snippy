@@ -390,17 +390,19 @@ public partial class MainWindow : Window
                 TabController.Items.Add(tabItem);
                 
                 var htmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "xTerm.js", "terminal.html");
-                tab.WebView.Address = $"file://{htmlPath}";
+                var theme = configManager.ClientPreferences[0].Theme.ToLower();
+                var fontSize = configManager.ClientPreferences[0].FontSize;
+                tab.WebView.Address = $"file://{htmlPath}?fontSize={fontSize}&theme={theme}";
                 tab.Bridge = new TerminalBridge();
                 tab.Bridge.OnResize = (cols, rows) => tab.SshService.Resize(cols, rows);
                 tab.WebView.RegisterJavascriptObject("terminalBridge", tab.Bridge);
                 
               
-                await Task.Delay(1000);
+                /*await Task.Delay(1000);
                 tab.WebView.ExecuteScript($"term.options.fontSize = {configManager.ClientPreferences[0].FontSize};");
         
                 bool isDark = configManager.ClientPreferences[0].Theme == "Dark";
-                tab.WebView.ExecuteScript($"setTheme({isDark.ToString().ToLower()})");
+                tab.WebView.ExecuteScript($"setTheme({isDark.ToString().ToLower()})");*/
                 
 
                 _ = Task.Run(() => ConnectSSH(server, tab, tabItem, snippetContent));
@@ -411,7 +413,9 @@ public partial class MainWindow : Window
             
             ConnectionListSplitter.IsVisible = false;
             ConnectionList.IsVisible = false;
-            ConnectionList.MinWidth = 0;
+            var column = ConnectionGrid.ColumnDefinitions[2];
+            column.MinWidth = 0;
+            column.Width = new GridLength(0);
         }
         else
         {
@@ -473,7 +477,9 @@ public partial class MainWindow : Window
     {
         ConnectionList.IsVisible = false;
         ConnectionListSplitter.IsVisible = false;
-        ConnectionList.MinWidth = 0;
+        var column = ConnectionGrid.ColumnDefinitions[2];
+        column.MinWidth = 0;
+        column.Width = new GridLength(0);
 
     }
 }
