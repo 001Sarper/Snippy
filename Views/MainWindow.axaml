@@ -31,7 +31,7 @@
                        <Grid.ColumnDefinitions>
                            <ColumnDefinition Width="*"/>
                            <ColumnDefinition Width="Auto"/>
-                           <ColumnDefinition Width="Auto" MinWidth="200" MaxWidth="350"/>
+                           <ColumnDefinition Width="Auto" MinWidth="0" MaxWidth="350"/>
                        </Grid.ColumnDefinitions>
                        
                        <TabControl Grid.Column="0" x:Name="TabController">
@@ -44,17 +44,18 @@
                            </TabItem>
                        </TabControl>
                        
-                       <GridSplitter x:Name="ConnectionListSplitter" IsVisible="false" Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" />
+                       <GridSplitter x:Name="ConnectionListSplitter" IsVisible="False" Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" />
                        
-                       <Grid x:Name="ConnectionList" IsVisible="false" Grid.Column="2" RowDefinitions="*,Auto,Auto" Background="{DynamicResource ServerListStackPanelBackground}">
-                           <StackPanel Grid.Row="0" x:Name="ServerSelectionSection" Spacing="10" Orientation="Vertical" HorizontalAlignment="Stretch">
+                       <Grid x:Name="ConnectionList" IsVisible="False" Grid.Column="2" RowDefinitions="Auto,Auto,*,Auto,Auto" Background="{DynamicResource ServerListStackPanelBackground}">
+                           <Button Grid.Row="0" HorizontalAlignment="Right" Content="✕" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5" Click="CloseServerSelectionSection_OnClick" Height="20" Width="30" FontSize="14" Padding="-2" Background="{DynamicResource DeleteButtonColor}" BorderBrush="{DynamicResource DeleteButtonBorderColor}" Foreground="{DynamicResource DeleteButtonTextColor}"/>
+                           <Separator Grid.Row="1" />
+                           <StackPanel Grid.Row="2" x:Name="ServerSelectionSection" Spacing="10" Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,0">
                                
                            </StackPanel>
                            
-                           <Separator Grid.Row="1"/>
-                           <Button Grid.Row="2" Content="Confirm" Click="ConfirmServersButton_OnClick" Background="{DynamicResource ConfirmButtonColor}" BorderBrush="{DynamicResource ConfirmButtonBorderColor}" Foreground="{DynamicResource ConfirmButtonTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2" Height="30" Width="80"/>
+                           <Separator Grid.Row="3"/>
+                           <Button Grid.Row="4" x:Name="ServerSelectionConfirmButton" Content="Confirm" Click="ConfirmServersButton_OnClick" Background="{DynamicResource ConfirmButtonColor}" BorderBrush="{DynamicResource ConfirmButtonBorderColor}" Foreground="{DynamicResource ConfirmButtonTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2" Height="30" Width="80"/>
                        </Grid>
-                       
                    </Grid>
                </Grid> 
         </Border>

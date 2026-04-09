@@ -34,11 +34,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Remove="Assets\Images\deleteIcon.png" />
-    <None Remove="Assets\Images\editIcon.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Assets\" />
+    <None Include="Assets\xTerm.js\terminal.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
   <Target Name="CopyCefGlueBrowserProcess" AfterTargets="Publish">

@@ -11,12 +11,6 @@ public class TerminalBridge
     public Action<string>? OnInput { get; set; }
     public Action<int, int>? OnResize { get; set; }
     
-    public void sendInput(string data)
-    {
-        Console.WriteLine($"Input: {BitConverter.ToString(System.Text.Encoding.UTF8.GetBytes(data))}");
-        OnInput?.Invoke(data);
-    }
-    
     public void setSize(int cols, int rows)
     {
         Cols = cols;

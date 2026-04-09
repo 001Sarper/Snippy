@@ -12,7 +12,7 @@ public class SSH_Service
     private SshClient _client;
     private ShellStream _shell;
 
-    public void Connect(string host, int port, string user, string password, bool isPrivateKeyUsed, string privateKey, string passphrase, Action<string> onOutput, int cols = 80, int rows = 24)
+    public void Connect(string host, int port, string user, string password, bool isPrivateKeyUsed, string privateKey, string passphrase, string snippetContent, Action<string> onOutput, int cols = 80, int rows = 24)
     {
         Console.WriteLine($"SSH Connect with size: {cols}x{rows}");
         if (isPrivateKeyUsed)
@@ -28,19 +28,34 @@ public class SSH_Service
         }
         
         _client.Connect();
+        
+        var cmd = _client.CreateCommand(snippetContent);
+        var result = cmd.BeginExecute();
+        var stream = cmd.OutputStream;
+        var encoding = Encoding.UTF8;
 
-        _shell = _client.CreateShellStream("xterm-256color", (uint)cols, (uint)rows, 0, 0, 1024);
+        using (var reader = new StreamReader(stream, encoding, true, 1024, true))
+        {
+            while (!result.IsCompleted || !reader.EndOfStream)
+            {
+                string line = reader.ReadLine();
+                if (line != null)
+                {
+                    onOutput(line);
+                }
+            }
+        }
+
+        cmd.EndExecute(result);
+        _client.Disconnect();
+
+        /*_shell = _client.CreateShellStream("xterm-256color", (uint)cols, (uint)rows, 0, 0, 1024);
 
         _shell.DataReceived += (sender, e) =>
         {
             var output = Encoding.UTF8.GetString(e.Data);
             onOutput(output);
-        };
-    }
-
-    public void SendInput(string input)
-    {
-        _shell.Write(input);
+        };*/
     }
 
     public void Disconnect()

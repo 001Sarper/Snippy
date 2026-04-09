@@ -3,16 +3,21 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
+using Avalonia.Threading;
 using MsBox.Avalonia;
 using Snippy.Models.FileManagment.Config;
 using Snippy.Models.FileManagment.Snippets;
+using Snippy.Models.SSH;
 using Snippy.Views;
+using Microsoft.AspNetCore.DataProtection;
+using WebViewControl;
 
 namespace Snippy;
 
@@ -24,10 +29,16 @@ public partial class MainWindow : Window
     private static readonly string _snippetsDirectory = Path.Combine(_parentDirectory, "Snippets");
     
     private static readonly string _connectionsFilePath = Path.Combine(_configDirectory, "ClientConnections.json");
+    private static readonly string _preferencesFilePath = Path.Combine(_configDirectory, "ClientPreferences.json");
     
     private static readonly string _snippetsFilePath = Path.Combine(_snippetsDirectory, "SnippetList.json");
-
+    private static readonly string _snippetFilesDirectory = Path.Combine(_snippetsDirectory, "SnippetFiles");
+    
     private List<ClientConnection> _checkedServers = new List<ClientConnection>();
+    
+    public List<WebView> TerminalList = new List<WebView>();
+    
+    
     
     public static MainWindow? Instance { get; private set; }
     
@@ -187,8 +198,11 @@ public partial class MainWindow : Window
             }
         }
 
+        ServerSelectionConfirmButton.Tag = snippet;
         ConnectionListSplitter.IsVisible = true;
+        ConnectionList.MinWidth = 200;
         ConnectionList.IsVisible = true;
+        
     }
 
     private void AddConnection(ClientConnection connection)
@@ -291,17 +305,151 @@ public partial class MainWindow : Window
 
     private async void ConfirmServersButton_OnClick(object? sender, RoutedEventArgs e)
     {
+        var button =  sender as Button;
+        var snippet = button.Tag as Snippet;
+        
         if (_checkedServers.Count > 0)
         {
+            string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
+            string snippetContent = File.ReadAllText(filePath);
+            
             foreach (var server in _checkedServers)
             {
-                Console.WriteLine("Checked: " + server.Name);
+                string json = File.ReadAllText(_preferencesFilePath);
+                ConfigManager configManager = JsonSerializer.Deserialize<ConfigManager>(json);
+
+                SSH_Tab tab = new SSH_Tab()
+                {
+                    WebView = new WebView(),
+                    SshService = new SSH_Service(),
+                    Bridge = new TerminalBridge()
+                };
+                
+                TerminalList.Add(tab.WebView);
+                
+                TabItem tabItem = new TabItem
+                {
+                    FontSize = 12,
+                    IsSelected =  true,
+                    Tag = tab
+                };
+                
+                var headerPanel = new StackPanel { Orientation = Orientation.Horizontal, Spacing = 6 };
+                var headerText = new TextBlock { Text = snippet.Name + " @ " + server.Name, VerticalAlignment = VerticalAlignment.Center };
+                var closeButton = new Button
+                {
+                    Content = "✕",
+                    FontSize = 10,
+                    Padding = new Thickness(4, 1),
+                    VerticalAlignment = VerticalAlignment.Center
+                };
+
+                closeButton.Click += (s, args) =>
+                {
+                    TabController.Items.Remove(tabItem);
+                    // Cleanup
+                    tab.SshService?.Disconnect();
+                    tab.WebView?.Dispose();
+                };
+
+                headerPanel.Children.Add(headerText);
+                headerPanel.Children.Add(closeButton);
+                tabItem.Header = headerPanel;
+        
+                tabItem.GotFocus += SelectInput_OnClick;
+                tabItem.Content = tab.WebView;
+                
+                TabController.Items.Add(tabItem);
+                
+                var htmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "xTerm.js", "terminal.html");
+                tab.WebView.Address = $"file://{htmlPath}";
+                tab.Bridge = new TerminalBridge();
+                tab.Bridge.OnResize = (cols, rows) => tab.SshService.Resize(cols, rows);
+                tab.WebView.RegisterJavascriptObject("terminalBridge", tab.Bridge);
+                
+                Console.WriteLine($"HTML Path: {htmlPath}");
+                Console.WriteLine($"File exists: {File.Exists(htmlPath)}");
+                
+                Console.WriteLine(Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets")));
+                Console.WriteLine(string.Join("\n", Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*", SearchOption.AllDirectories)));
+                
+                await Task.Delay(1000);
+                tab.WebView.ExecuteScript($"term.options.fontSize = {configManager.ClientPreferences[0].FontSize};");
+        
+                bool isDark = configManager.ClientPreferences[0].Theme == "Dark";
+                tab.WebView.ExecuteScript($"setTheme({isDark.ToString().ToLower()})");
+                
+
+                _ = Task.Run(() => ConnectSSH(server, tab, tabItem, snippetContent));
+                    
+                
+                
             }
+            
+            ConnectionListSplitter.IsVisible = false;
+            ConnectionList.IsVisible = false;
+            ConnectionList.MinWidth = 0;
         }
         else
         {
             var box = MessageBoxManager.GetMessageBoxStandard("Error", "There were no servers selected!");
             await box.ShowAsync();
         }
+    }
+    
+    private async Task ConnectSSH(ClientConnection connection, SSH_Tab connectionTab, TabItem tabItem, string snippetContent)
+    {
+        connectionTab.SshService.Disconnect();
+        bool privKeyUsed = connection.PrivateKeyUsed;
+
+        try
+        {
+            connectionTab.SshService.Connect(
+                connection.Host,
+                connection.Port,
+                connection.Username,
+                !privKeyUsed ? App.Instance.Protector.Unprotect(connection.Password) : "",
+                privKeyUsed,
+                privKeyUsed && !string.IsNullOrEmpty(connection.PrivateKey)
+                    ? App.Instance.Protector.Unprotect(connection.PrivateKey)
+                    : "",
+                privKeyUsed && !string.IsNullOrEmpty(connection.Passphrase)
+                    ? App.Instance.Protector.Unprotect(connection.Passphrase)
+                    : "", snippetContent,
+                (output) =>
+                {
+                    var safe = output.Replace("`", "\\`").Replace("\\", "\\\\");
+                    connectionTab.WebView.ExecuteScript($"term.write(`{safe}\r\n`)");
+                    
+                }, connectionTab.Bridge.Cols, connectionTab.Bridge.Rows);
+        }
+        catch (Exception e)
+        {
+            TabController.Items.Remove(tabItem);
+            // Cleanup
+            connectionTab.SshService?.Disconnect();
+            connectionTab.WebView?.Dispose();
+            
+            var box = MessageBoxManager.GetMessageBoxStandard("Couldn't connect to SSH", "Connection to the SSH Server could not be estabilished. Error: \n" + e);
+            await box.ShowAsync();
+        }
+    }
+    
+    private void SelectInput_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var button = sender as TabItem;
+        var currentTab =  button.Tag as SSH_Tab;
+        
+        currentTab.Bridge.OnResize = (cols, rows) => currentTab.SshService.Resize(cols, rows);
+        currentTab.WebView.RegisterJavascriptObject("terminalBridge", currentTab.Bridge);
+        currentTab.WebView.Focus();
+        
+    }
+
+    private void CloseServerSelectionSection_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ConnectionList.IsVisible = false;
+        ConnectionListSplitter.IsVisible = false;
+        ConnectionList.MinWidth = 0;
     }
 }

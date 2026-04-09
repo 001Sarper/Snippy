@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+    <script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xterm-addon-fit/lib/xterm-addon-fit.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { height: 100%; background: #0D1117; }
+        #terminal { height: 100%; pointer-events: none; }
+    </style>
+</head>
+<body>
+<div id="terminal"></div>
+<script>
+    var term = new Terminal({
+        convertEol: true,
+        fontSize: 14,
+        fontFamily: 'JetBrains Mono, Cascadia Code, monospace',
+        cursorBlink: false,
+        cursorStyle: 'block',
+        scrollback: 1000,
+        disableStdin: true,
+        theme: {
+            background: '#0D1117',
+            foreground: '#c9d1d9',
+            cursor: '#c9d1d9',
+            selection: '#264f78',
+            black: '#484f58',
+            red: '#ff7b72',
+            green: '#3fb950',
+            yellow: '#d29922',
+            blue: '#58a6ff',
+            magenta: '#bc8cff',
+            cyan: '#39c5cf',
+            white: '#b1bac4',
+        }
+    });
+
+    var fitAddon = new FitAddon.FitAddon();
+    term.loadAddon(fitAddon);
+    term.open(document.getElementById('terminal'));
+
+    setTimeout(function() {
+        fitAddon.fit();
+        terminalBridge.setSize(term.cols, term.rows);
+        terminalBridge.connect();
+    }, 500);
+
+    window.addEventListener('resize', function() {
+        fitAddon.fit();
+        terminalBridge.setSize(term.cols, term.rows);
+    });
+
+    function setTheme(isDark) {
+        if (isDark) {
+            term.options.theme = {
+                background: '#0D1117',
+                foreground: '#c9d1d9',
+                cursor: '#c9d1d9',
+                selection: '#264f78',
+                black: '#484f58',
+                red: '#ff7b72',
+                green: '#3fb950',
+                yellow: '#d29922',
+                blue: '#58a6ff',
+                magenta: '#bc8cff',
+                cyan: '#39c5cf',
+                white: '#b1bac4',
+            };
+            document.body.style.background = '#0D1117';
+        } else {
+            term.options.theme = {
+                background: '#e8f1fb',
+                foreground: '#1f2328',
+                cursor: '#1f2328',
+                selection: '#b0ceed',
+                black: '#6e7781',
+                red: '#cf222e',
+                green: '#116329',
+                yellow: '#9a6700',
+                blue: '#185FA5',
+                magenta: '#8250df',
+                cyan: '#0550ae',
+                white: '#6e7781',
+            };
+            document.body.style.background = '#e8f1fb';
+        }
+    }
+
+    function getSize() {
+        fitAddon.fit();
+        return term.cols + "," + term.rows;
+    }
+</script>
+</body>
+</html>
