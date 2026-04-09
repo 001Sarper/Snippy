@@ -5,5 +5,6 @@ public class Snippet
     public string Name { get; set; }
     public string Author { get; set; }
     public string Description { get; set; }
+    public string ID { get; set; }
     public string Path { get; set; }
 }

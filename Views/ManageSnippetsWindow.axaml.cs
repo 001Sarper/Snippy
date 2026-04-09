@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
 using Avalonia;
@@ -9,6 +10,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
+using Snippy.Models.Cards;
 using Snippy.Models.FileManagment.Snippets;
 
 namespace Snippy.Views;
@@ -25,6 +27,8 @@ public partial class ManageSnippetsWindow : Window
     private static readonly string _snippetFilesDirectory = Path.Combine(_snippetsDirectory, "SnippetFiles");
     
     public static ManageSnippetsWindow? Instance { get; private set; }
+    
+    public Dictionary<string, SnippetCard> SnippetCards = new();
     
     
     public ManageSnippetsWindow()
@@ -62,13 +66,11 @@ public partial class ManageSnippetsWindow : Window
         var titleTextBlock = new TextBlock
         {
             Text = snippet.Name,
-            Name = "TitleTextBlock-" + snippet.Name,
             FontSize = 14
         };
         var authorTextBlock = new TextBlock
         {
             Text = "@" + snippet.Author,
-            Name =  "AuthorTextBlock-" + snippet.Name,
             Margin = new Thickness(0,5,0,0),
             FontSize = 12
         };
@@ -83,7 +85,6 @@ public partial class ManageSnippetsWindow : Window
         var editSnippetButton = new Button
         {
             Content = "Edit",
-            Name =  "EditSnippetButton-" + snippet.Name,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Right,
             Margin = new Thickness(0,0,5,0),
@@ -99,7 +100,6 @@ public partial class ManageSnippetsWindow : Window
         var deleteSnippetButton = new Button
         {
             Content = "Delete",
-            Name =  "DeleteSnippetButton-" + snippet.Name,
             VerticalAlignment = VerticalAlignment.Center,
             HorizontalAlignment = HorizontalAlignment.Right,
             Tag = (snippet, index)
@@ -118,6 +118,14 @@ public partial class ManageSnippetsWindow : Window
         parentGrid.Children.Add(childGrid);
         parentGrid.Children.Add(editSnippetButton);
         parentGrid.Children.Add(deleteSnippetButton);
+
+        SnippetCards[snippet.ID] = new SnippetCard
+        {
+            TitleBlock = titleTextBlock,
+            AuthorBlock = authorTextBlock,
+            EditButton = editSnippetButton,
+            DeleteButton = deleteSnippetButton
+        };
         
         SnippetsList.Children.Add(parentGrid);
 
@@ -149,7 +157,7 @@ public partial class ManageSnippetsWindow : Window
             
             string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
             
-            snippetManager.Snippets.RemoveAll(s => s.Name == snippet.Name);
+            snippetManager.Snippets.RemoveAll(s => s.ID == snippet.ID);
             File.Delete(filePath);
             
             string newJson = JsonSerializer.Serialize(snippetManager);

@@ -126,6 +126,7 @@ public partial class SnippetEditorWindow : Window
             
             File.WriteAllText(filePath, editor.Text, Encoding.UTF8);
             newSnippet.Path = SnippetNameTextBlock.Text + ".sh";
+            newSnippet.ID = Guid.NewGuid().ToString("N")[..8];
             snippetManager.Snippets.Add(newSnippet);
             string json = JsonSerializer.Serialize(snippetManager);
             File.WriteAllText(_snippetsFilePath, json);
@@ -143,23 +144,27 @@ public partial class SnippetEditorWindow : Window
             
             File.WriteAllText(filePath, editor.Text, Encoding.UTF8);
             newSnippet.Path = snippet.Path;
+            newSnippet.ID = snippet.ID;
             snippetManager.Snippets[_snippetIndex]  = newSnippet;
             string json = JsonSerializer.Serialize(snippetManager);
             File.WriteAllText(_snippetsFilePath, json);
-            
-            MainWindow.Instance.FindControl<TextBlock>("TitleTextBlock-" + snippet.Name).Text = newSnippet.Name;
-            MainWindow.Instance.FindControl<TextBlock>("AuthorTextBlock-" + snippet.Name).Text = newSnippet.Author;
-            MainWindow.Instance.FindControl<TextBlock>("DescriptionTextBlock-" + snippet.Name).Text = newSnippet.Description;
-            
-            MainWindow.Instance.FindControl<Button>("ViewSnippetButton-" + snippet.Name).Tag = newSnippet;
-            MainWindow.Instance.FindControl<Button>("ExecuteSnippetButton-" + snippet.Name).Tag = newSnippet;
-            
-            
-            ManageSnippetsWindow.Instance.FindControl<TextBlock>("TitleTextBlock-" + snippet.Name).Text = newSnippet.Name;
-            ManageSnippetsWindow.Instance.FindControl<TextBlock>("AuthorTextBlock-" + snippet.Name).Text = newSnippet.Author;
-            
-            ManageSnippetsWindow.Instance.FindControl<Button>("EditSnippetButton-" + snippet.Name).Tag = newSnippet;
-            ManageSnippetsWindow.Instance.FindControl<Button>("DeleteSnippetButton-" + snippet.Name).Tag = newSnippet;
+
+            if (MainWindow.Instance.SnippetCards.TryGetValue(snippet.ID, out var card))
+            {
+                card.TitleBlock.Text = newSnippet.Name;
+                card.AuthorBlock.Text = newSnippet.Author;
+                card.DescriptionBlock.Text = newSnippet.Description;
+                card.ViewButton.Tag = newSnippet;
+                card.ExecuteButton.Tag = newSnippet;
+            }
+
+            if (ManageSnippetsWindow.Instance.SnippetCards.TryGetValue(snippet.ID, out card))
+            {
+                card.TitleBlock.Text = newSnippet.Name;
+                card.AuthorBlock.Text = newSnippet.Author;
+                card.EditButton.Tag = newSnippet;
+                card.DeleteButton.Tag = newSnippet;
+            }
 
             await box.ShowAsync();
             Close();

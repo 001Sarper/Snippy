@@ -17,6 +17,7 @@ using Snippy.Models.FileManagment.Snippets;
 using Snippy.Models.SSH;
 using Snippy.Views;
 using Microsoft.AspNetCore.DataProtection;
+using Snippy.Models.Cards;
 using WebViewControl;
 
 namespace Snippy;
@@ -37,8 +38,8 @@ public partial class MainWindow : Window
     private List<ClientConnection> _checkedServers = new List<ClientConnection>();
     
     public List<WebView> TerminalList = new List<WebView>();
-    
-    
+
+    public Dictionary<string, SnippetCard> SnippetCards = new();
     
     public static MainWindow? Instance { get; private set; }
     
@@ -64,6 +65,8 @@ public partial class MainWindow : Window
 
     public void AddSnippet(Snippet snippet)
     {
+        
+        
         var border = new Border
         {
             CornerRadius = new CornerRadius(12),
@@ -85,7 +88,6 @@ public partial class MainWindow : Window
         var titleTextBlock = new TextBlock
         {
             Text = snippet.Name,
-            Name = "TitleTextBlock-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Center,
             FontWeight = FontWeight.Medium,
             FontSize = 14,
@@ -103,7 +105,6 @@ public partial class MainWindow : Window
         var authorTextBlock = new TextBlock
         {
             Text = "@" + snippet.Author,
-            Name = "AuthorTextBlock-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Left,
             FontSize = 12,
             Margin = new Thickness(0, 0, 0, 6)
@@ -113,7 +114,6 @@ public partial class MainWindow : Window
         var descriptionTextBlock = new TextBlock
         {
             Text = snippet.Description,
-            Name = "DescriptionTextBlock-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Left,
             FontSize = 11,
             TextWrapping = TextWrapping.Wrap,
@@ -129,7 +129,6 @@ public partial class MainWindow : Window
         var viewSnippetButton = new Button
         {
             Content = "View",
-            Name = "ViewSnippetButton-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             HorizontalContentAlignment = HorizontalAlignment.Center,
             FontSize = 11,
@@ -145,7 +144,6 @@ public partial class MainWindow : Window
         var executeSnippetButton = new Button
         {
             Content = "Execute",
-            Name = "ExecuteSnippetButton-" + snippet.Name,
             HorizontalAlignment = HorizontalAlignment.Stretch,
             HorizontalContentAlignment = HorizontalAlignment.Center,
             FontSize = 11,
@@ -177,7 +175,21 @@ public partial class MainWindow : Window
         grid.Children.Add(buttonsGrid);
 
         border.Child = grid;
+
+        SnippetCards[snippet.ID] = new SnippetCard
+        {
+            TitleBlock = titleTextBlock,
+            AuthorBlock = authorTextBlock,
+            DescriptionBlock = descriptionTextBlock,
+            ViewButton = viewSnippetButton,
+            ExecuteButton = executeSnippetButton
+        };
+        
+        
         SnippetList.Children.Add(border);
+        
+        
+        
     }
 
     private void ExecuteSnippetButton_OnClick(object? sender, RoutedEventArgs e)

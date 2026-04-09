@@ -55,7 +55,7 @@ public partial class ManageHostsWindow : Window
         grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
         grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
         
-        var textblock = new TextBlock{Text = connection.Name, VerticalAlignment = VerticalAlignment.Center};
+        var textblock = new TextBlock{Text = connection.Name, VerticalAlignment = VerticalAlignment.Center, Margin=new Thickness(0,0,5,0)};
         
         var editButton = new Button
         {
@@ -96,6 +96,7 @@ public partial class ManageHostsWindow : Window
         grid.Children.Add(editButton);
         grid.Children.Add(deleteButton);
         ParentPanel.Children.Add(grid);
+        
         
         
         
