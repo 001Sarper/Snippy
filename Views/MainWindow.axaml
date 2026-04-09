@@ -27,7 +27,7 @@
                            <MenuItem Header="GitHub" Click="OpenGithubMenuItem_OnClick"/>
                        </MenuItem>
                    </Menu>
-                   <Grid Grid.Row="1" Background="{DynamicResource BackgroundColor}">
+                   <Grid Grid.Row="1" x:Name="ConnectionGrid" Background="{DynamicResource BackgroundColor}">
                        <Grid.ColumnDefinitions>
                            <ColumnDefinition Width="*"/>
                            <ColumnDefinition Width="Auto"/>

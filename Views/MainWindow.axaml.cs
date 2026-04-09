@@ -209,12 +209,15 @@ public partial class MainWindow : Window
                 AddConnection(connection);
             }
         }
-
+        var column = ConnectionGrid.ColumnDefinitions[2];
+        
         _checkedServers.Clear();
+        ConnectionList.Tag = column;
         ServerSelectionConfirmButton.Tag = snippet;
         ConnectionListSplitter.IsVisible = true;
-        ConnectionList.MinWidth = 200;
         ConnectionList.IsVisible = true;
+        column.MinWidth = 220;
+        column.Width = GridLength.Auto;
         
     }
 
@@ -240,7 +243,7 @@ public partial class MainWindow : Window
         grid.ColumnDefinitions.Add(new ColumnDefinition(GridLength.Auto));
         
         
-        var textblock = new TextBlock{Text = connection.Name, VerticalAlignment = VerticalAlignment.Center, FontSize = 14, Margin=new Thickness(5,0,0,0)};
+        var textblock = new TextBlock{Text = connection.Name, VerticalAlignment = VerticalAlignment.Center, FontSize = 14, Margin=new Thickness(5,0,5,0)};
         var checkbox = new CheckBox
         {
             Tag = connection
@@ -286,6 +289,12 @@ public partial class MainWindow : Window
 
     private async void ManageSnippetsMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (ConnectionList.IsVisible && ConnectionListSplitter.IsVisible)
+        {
+            ConnectionList.IsVisible = false;
+            ConnectionListSplitter.IsVisible = false;
+        }
+        
         ManageSnippetsWindow manageSnippetsWindow = new ManageSnippetsWindow();
         await manageSnippetsWindow.ShowDialog(this);
     }
@@ -312,6 +321,12 @@ public partial class MainWindow : Window
 
     private async void ManageHostsMenuItem_OnClick(object? sender, RoutedEventArgs e)
     {
+        if (ConnectionList.IsVisible && ConnectionListSplitter.IsVisible)
+        {
+            ConnectionList.IsVisible = false;
+            ConnectionListSplitter.IsVisible = false;
+        }
+        
         ManageHostsWindow manageHostsWindow = new ManageHostsWindow();
         await manageHostsWindow.ShowDialog(this);
     }
