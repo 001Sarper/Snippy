@@ -15,13 +15,11 @@ public class TerminalBridge
     {
         Cols = cols;
         Rows = rows;
-        Console.WriteLine($"setSize called: {cols}x{rows}");
         OnResize?.Invoke(cols, rows);
     }
     
     public void connect()
     {
-        Console.WriteLine("connect called");
         OnConnect?.Invoke();
     }
 }

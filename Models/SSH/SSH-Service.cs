@@ -14,7 +14,6 @@ public class SSH_Service
 
     public void Connect(string host, int port, string user, string password, bool isPrivateKeyUsed, string privateKey, string passphrase, string snippetContent, Action<string> onOutput, int cols = 80, int rows = 24)
     {
-        Console.WriteLine($"SSH Connect with size: {cols}x{rows}");
         if (isPrivateKeyUsed)
         {
             var keyStream = new MemoryStream(Encoding.UTF8.GetBytes(privateKey));
@@ -67,7 +66,6 @@ public class SSH_Service
     
     public void Resize(int cols, int rows)
     {
-        Console.WriteLine($"Resize called: {cols}x{rows}");
         _shell?.ChangeWindowSize((uint)cols, (uint)rows, 0, 0);
     }
 }

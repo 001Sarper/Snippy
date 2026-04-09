@@ -198,6 +198,7 @@ public partial class MainWindow : Window
             }
         }
 
+        _checkedServers.Clear();
         ServerSelectionConfirmButton.Tag = snippet;
         ConnectionListSplitter.IsVisible = true;
         ConnectionList.MinWidth = 200;
@@ -367,12 +368,7 @@ public partial class MainWindow : Window
                 tab.Bridge.OnResize = (cols, rows) => tab.SshService.Resize(cols, rows);
                 tab.WebView.RegisterJavascriptObject("terminalBridge", tab.Bridge);
                 
-                Console.WriteLine($"HTML Path: {htmlPath}");
-                Console.WriteLine($"File exists: {File.Exists(htmlPath)}");
-                
-                Console.WriteLine(Directory.Exists(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets")));
-                Console.WriteLine(string.Join("\n", Directory.GetFiles(AppDomain.CurrentDomain.BaseDirectory, "*", SearchOption.AllDirectories)));
-                
+              
                 await Task.Delay(1000);
                 tab.WebView.ExecuteScript($"term.options.fontSize = {configManager.ClientPreferences[0].FontSize};");
         
@@ -451,5 +447,6 @@ public partial class MainWindow : Window
         ConnectionList.IsVisible = false;
         ConnectionListSplitter.IsVisible = false;
         ConnectionList.MinWidth = 0;
+
     }
 }
