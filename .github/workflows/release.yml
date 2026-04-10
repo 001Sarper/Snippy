@@ -28,7 +28,7 @@ jobs:
 
       - name: Publish
         run: |
-          dotnet publish Snippy/Snippy.csproj \
+          dotnet publish Snippy.csproj \
             -c Release \
             -r ${{ matrix.rid }} \
             --self-contained true \
