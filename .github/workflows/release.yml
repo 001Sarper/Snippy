@@ -32,7 +32,10 @@ jobs:
       - name: Publish
         run: dotnet publish Snippy.csproj -c Release -r ${{ matrix.rid }} --self-contained true -o ./publish
 
+      - name: Zip
+        run: zip -r snippy-${{ matrix.rid }}.zip ./publish
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         with:
-          files: ./publish/*
+          files: snippy-${{ matrix.rid }}.zip
