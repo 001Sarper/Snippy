@@ -1,3 +1,6 @@
+// Copyright (C) 2026 sarp_03
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 using System;
 using System.IO;
 using System.Text;

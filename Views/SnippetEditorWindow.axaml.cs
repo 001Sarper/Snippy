@@ -1,12 +1,12 @@
+// Copyright (C) 2026 sarp_03
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 using System;
 using System.IO;
-using System.Linq;
 using System.Text;
 using System.Text.Json;
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Markup.Xaml;
 using AvaloniaEdit;
 using AvaloniaEdit.TextMate;
 using TextMateSharp.Grammars;

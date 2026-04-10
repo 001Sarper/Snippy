@@ -1,3 +1,6 @@
+// Copyright (C) 2026 sarp_03
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 using System;
 using System.IO;
 using System.Text.Json;
@@ -5,10 +8,6 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
-using Avalonia.Markup.Xaml;
-using Avalonia.Markup.Xaml.MarkupExtensions;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
 using Avalonia.Platform.Storage;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;

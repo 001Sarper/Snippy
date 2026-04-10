@@ -18,6 +18,23 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 - **Snippet Hub** *(coming soon)* — Browse and import community snippets directly from within the app
 
 ---
+## Screenshots
+### Dark Mode
+<div align="center">
+  <img src="Assets/Screenshots/snippy_main.png" width="49%" />
+  <img src="Assets/Screenshots/snippy_snippetmanagement.png" width="49%" />
+  <img src="Assets/Screenshots/snippy_hostmanagement.png" width="49%" />
+  <img src="Assets/Screenshots/snippy_execution.png" width="49%" />
+</div>
+
+### Light Mode
+<div align="center">
+  <img src="Assets/Screenshots/snippy_snippetmanagement_light.png" width="49%" />
+  <img src="Assets/Screenshots/snippy_hostmanagement_light.png" width="49%" />
+  <img src="Assets/Screenshots/snippy_execution_light.png" width="49%" />
+</div>
+
+---
 
 ## Installation
 

@@ -1,3 +1,6 @@
+// Copyright (C) 2026 sarp_03
+// SPDX-License-Identifier: GPL-3.0-or-later
+
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,7 +13,6 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.MarkupExtensions;
 using Avalonia.Media;
-using Avalonia.Threading;
 using MsBox.Avalonia;
 using Snippy.Models.FileManagment.Config;
 using Snippy.Models.FileManagment.Snippets;
