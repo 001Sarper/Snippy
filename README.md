@@ -36,13 +36,9 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 
 ## Installation
 
-No release yet. To run from source:
-
-```bash
-git clone -b dev https://github.com/001Sarper/Snippy.git
-cd Snippy
-dotnet run
-```
+1. Get your preferred version of Snippy from the releases page
+2. Extract the ZIP File
+3. Start the 'Snippy' File
 
 **Requirements:**
 - .NET 10
