@@ -62,7 +62,6 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 - [x] Live output streaming per server tab
 - [x] Preferences window
 - [ ] Snippet Hub — community snippet sharing via URL
-- [ ] First stable release
 
 ---
 
