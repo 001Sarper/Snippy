@@ -22,6 +22,10 @@
                              <SolidColorBrush x:Key="ServerListSectionBorder">#1e3a52</SolidColorBrush>
                              <SolidColorBrush x:Key="ServerListStackPanelBackground">#0d1520</SolidColorBrush>
                              
+                             <SolidColorBrush x:Key="CardBackgroundColor" Color="#1C1C26"/>
+                             <SolidColorBrush x:Key="PrimaryTextColor" Color="#F0F0F0"/>
+                             <SolidColorBrush x:Key="TertiaryTextColor" Color="#55556A"/>
+                             <SolidColorBrush x:Key="BorderColor" Color="#2A2A3A"/>
                              
                              <!-- Button Colors -->
                              <SolidColorBrush x:Key="ConfirmButtonColor">#1a3a5c</SolidColorBrush>
@@ -75,6 +79,12 @@
                              <SolidColorBrush x:Key="ServerListSectionBackground">#dce8f5</SolidColorBrush>
                              <SolidColorBrush x:Key="ServerListSectionBorder">#a8c4e0</SolidColorBrush>
                              <SolidColorBrush x:Key="ServerListStackPanelBackground">#f0f6fc</SolidColorBrush>
+                             
+
+                             <SolidColorBrush x:Key="CardBackgroundColor" Color="#EBEBEB"/>
+                             <SolidColorBrush x:Key="PrimaryTextColor" Color="#1A1A1A"/>
+                             <SolidColorBrush x:Key="TertiaryTextColor" Color="#9A9A9A"/>
+                             <SolidColorBrush x:Key="BorderColor" Color="#D0D0D0"/>
                              
                              
                              <!-- Button Colors -->

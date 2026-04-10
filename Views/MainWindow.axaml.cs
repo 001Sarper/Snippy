@@ -482,4 +482,10 @@ public partial class MainWindow : Window
         column.Width = new GridLength(0);
 
     }
+
+    private async void AboutSnippyMenuItem_OnClick(object? sender, RoutedEventArgs e)
+    {
+        AboutSnippyWindow aboutSnippyWindow = new  AboutSnippyWindow();
+        await aboutSnippyWindow.ShowDialog(this);
+    }
 }
