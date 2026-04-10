@@ -21,7 +21,7 @@
                        <MenuItem Header="View">
                            <MenuItem Header="Preferences" Click="PreferencesMenuItem_OnClick"/>
                        </MenuItem>
-                       <MenuItem Header="About">
+                       <MenuItem Header="Help">
                            <MenuItem Header="About Snippy" Click="AboutSnippyMenuItem_OnClick"/>
                            <Separator/>
                            <MenuItem Header="GitHub" Click="OpenGithubMenuItem_OnClick"/>

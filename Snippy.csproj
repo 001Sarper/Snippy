@@ -48,7 +48,7 @@
 
   <Target Name="CopyCefGlueBrowserProcess" AfterTargets="Publish">
     <ItemGroup>
-      <CefGlueFiles Include="$(NuGetPackageRoot)cefglue.common/$(CefGlueVersion)/bin/linux-x64/*" />
+      <CefGlueFiles Include="$(NuGetPackageRoot)cefglue.common/$(CefGlueVersion)/bin/$(RuntimeIdentifier)/*" />
     </ItemGroup>
     <Copy SourceFiles="@(CefGlueFiles)" DestinationFolder="$(PublishDir)CefGlueBrowserProcess" />
   </Target>

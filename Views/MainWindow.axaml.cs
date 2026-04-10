@@ -70,7 +70,7 @@ public partial class MainWindow : Window
         var border = new Border
         {
             CornerRadius = new CornerRadius(12),
-            Width = 160,
+            Width = 180,
             Height = 220,
             Padding = new Thickness(16),
             BorderThickness = new Thickness(1)
@@ -91,6 +91,7 @@ public partial class MainWindow : Window
             HorizontalAlignment = HorizontalAlignment.Center,
             FontWeight = FontWeight.Medium,
             FontSize = 14,
+            TextWrapping = TextWrapping.Wrap,
             Margin = new Thickness(0, 0, 0, 8)
         };
 
@@ -392,20 +393,17 @@ public partial class MainWindow : Window
                 var htmlPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Assets", "xTerm.js", "terminal.html");
                 var theme = configManager.ClientPreferences[0].Theme.ToLower();
                 var fontSize = configManager.ClientPreferences[0].FontSize;
-                tab.WebView.Address = $"file://{htmlPath}?fontSize={fontSize}&theme={theme}";
+                
                 tab.Bridge = new TerminalBridge();
                 tab.Bridge.OnResize = (cols, rows) => tab.SshService.Resize(cols, rows);
-                tab.WebView.RegisterJavascriptObject("terminalBridge", tab.Bridge);
                 
-              
-                /*await Task.Delay(1000);
-                tab.WebView.ExecuteScript($"term.options.fontSize = {configManager.ClientPreferences[0].FontSize};");
-        
-                bool isDark = configManager.ClientPreferences[0].Theme == "Dark";
-                tab.WebView.ExecuteScript($"setTheme({isDark.ToString().ToLower()})");*/
-                
+                tab.WebView.Loaded += (s, e) =>
+                {
+                    tab.WebView.RegisterJavascriptObject("terminalBridge", tab.Bridge);
+                    _ = Task.Run(() => ConnectSSH(server, tab, tabItem, snippetContent));
+                };
 
-                _ = Task.Run(() => ConnectSSH(server, tab, tabItem, snippetContent));
+                tab.WebView.Address = $"file://{htmlPath}?fontSize={fontSize}&theme={theme}";
                     
                 
                 
