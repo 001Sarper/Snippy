@@ -1,0 +1,56 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <CefGlueVersion>120.6099.211</CefGlueVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.3.12" />
+    <PackageReference Include="Avalonia.AvaloniaEdit" Version="11.4.1" />
+    <PackageReference Include="Avalonia.Desktop" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.3.12" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.3.12" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Include="Avalonia.Diagnostics" Version="11.3.12">
+      <IncludeAssets Condition="'$(Configuration)' != 'Debug'">None</IncludeAssets>
+      <PrivateAssets Condition="'$(Configuration)' != 'Debug'">All</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="AvaloniaEdit.TextMate" Version="11.4.1" />
+    <PackageReference Include="CefGlue.Avalonia" Version="$(CefGlueVersion)" />
+    <PackageReference Include="CefGlue.Common" Version="$(CefGlueVersion)" />
+    <PackageReference Include="MessageBox.Avalonia" Version="3.3.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection" Version="10.0.5" />
+    <PackageReference Include="Microsoft.AspNetCore.DataProtection.Extensions" Version="10.0.5" />
+    <PackageReference Include="SSH.NET" Version="2025.1.0" />
+    <PackageReference Include="Svg.Controls.Skia.Avalonia" Version="11.3.9.5" />
+    <PackageReference Include="WebViewControl-Avalonia" Version="3.120.11" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Windows\MainWindow.axaml.cs">
+      <DependentUpon>MainWindow.axaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Assets\xTerm.js\terminal.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Assets\Images\Desktop-icon.ico" />
+    <AvaloniaResource Include="Assets\Images\Desktop-icon.ico" />
+    <None Remove="Assets\Images\Logo-Long.svg" />
+    <AvaloniaResource Include="Assets\Images\Logo-Long.svg" />
+  </ItemGroup>
+
+  <Target Name="CopyCefGlueBrowserProcess" AfterTargets="Publish">
+    <ItemGroup>
+      <CefGlueFiles Include="$(NuGetPackageRoot)cefglue.common/$(CefGlueVersion)/bin/$(RuntimeIdentifier)/*" />
+    </ItemGroup>
+    <Copy SourceFiles="@(CefGlueFiles)" DestinationFolder="$(PublishDir)CefGlueBrowserProcess" />
+  </Target>
+
+</Project>

@@ -1,0 +1,135 @@
+<Application xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="Snippy.App"
+             RequestedThemeVariant="Default">
+             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+
+             <Application.Resources>
+                 <ResourceDictionary>
+                     <ResourceDictionary.ThemeDictionaries>
+                         <ResourceDictionary x:Key="Dark">
+                             <SolidColorBrush x:Key="BackgroundColor">#0D1117</SolidColorBrush>
+                             <SolidColorBrush x:Key="MenuColor">#0f1e2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConnectionListColor">#111827</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="SnippetColor">#0a1628</SolidColorBrush>
+                             <SolidColorBrush x:Key="SnippetBorderColor">#2a2a2a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="AuthorTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="SecondaryTextColor">#888780</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ServerListSectionBackground">#111d2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBorder">#1e3a52</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListStackPanelBackground">#0d1520</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="CardBackgroundColor" Color="#1C1C26"/>
+                             <SolidColorBrush x:Key="PrimaryTextColor" Color="#F0F0F0"/>
+                             <SolidColorBrush x:Key="TertiaryTextColor" Color="#55556A"/>
+                             <SolidColorBrush x:Key="BorderColor" Color="#2A2A3A"/>
+                             
+                             <!-- Button Colors -->
+                             <SolidColorBrush x:Key="ConfirmButtonColor">#1a3a5c</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonBorderColor">#2a5a8a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ShowPasswordButtonColor">#1a2a3a</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonBorderColor">#2a4a5a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="AddButtonColor">#1a4a5c</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonTextColor">#7ef0ef</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonBorderColor">#2a7a8a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ViewButtonColor">#1a3a5c</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonBorderColor">#2a5a6a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ExecuteButtonColor">#1a4a2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonTextColor">#7ecf9e</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonBorderColor">#2a6a3e</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="EditButtonColor">#1a3a4a</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonTextColor">#7ecfef</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonBorderColor">#2a5a6a</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="DeleteButtonColor">#4a1a1a</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonTextColor">#cf7e7e</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonBorderColor">#6a2a2a</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="SaveButtonColor">#1a4a2e</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonTextColor">#7ecf9e</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonBorderColor">#2a6a3e</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="CancelButtonColor">#2a2a2a</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonTextColor">#888780</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonBorderColor">#3a3a3a</SolidColorBrush>
+                         </ResourceDictionary>
+
+                         <ResourceDictionary x:Key="Light">
+                             <SolidColorBrush x:Key="BackgroundColor">#e8f1fb</SolidColorBrush>
+                             <SolidColorBrush x:Key="MenuColor">#c8ddf5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConnectionListColor">#F3F6FA</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="SnippetColor">#b0ceed</SolidColorBrush>
+                             <SolidColorBrush x:Key="SnippetBorderColor">#e0e0e0</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="AuthorTextColor">#185FA5</SolidColorBrush>
+                             <SolidColorBrush x:Key="SecondaryTextColor">#5F5E5A</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ServerListSectionBackground">#dce8f5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListSectionBorder">#a8c4e0</SolidColorBrush>
+                             <SolidColorBrush x:Key="ServerListStackPanelBackground">#f0f6fc</SolidColorBrush>
+                             
+
+                             <SolidColorBrush x:Key="CardBackgroundColor" Color="#EBEBEB"/>
+                             <SolidColorBrush x:Key="PrimaryTextColor" Color="#1A1A1A"/>
+                             <SolidColorBrush x:Key="TertiaryTextColor" Color="#9A9A9A"/>
+                             <SolidColorBrush x:Key="BorderColor" Color="#D0D0D0"/>
+                             
+                             
+                             <!-- Button Colors -->
+                             <SolidColorBrush x:Key="ConfirmButtonColor">#1a6aad</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonTextColor">#ffffff</SolidColorBrush>
+                             <SolidColorBrush x:Key="ConfirmButtonBorderColor">#1050a0</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ShowPasswordButtonColor">#daeaf8</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonTextColor">#185fa5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ShowPasswordButtonBorderColor">#85b7eb</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="AddButtonColor">#cce8f4</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonTextColor">#0a5a8a</SolidColorBrush>
+                             <SolidColorBrush x:Key="AddButtonBorderColor">#85c4e0</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ViewButtonColor">#4a90d9</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonTextColor">#185FA5</SolidColorBrush>
+                             <SolidColorBrush x:Key="ViewButtonBorderColor">#85B7EB</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="ExecuteButtonColor">#3a9e5f</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonTextColor">#3B6D11</SolidColorBrush>
+                             <SolidColorBrush x:Key="ExecuteButtonBorderColor">#97C459</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="EditButtonColor">#daeef7</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonTextColor">#185FA5</SolidColorBrush>
+                             <SolidColorBrush x:Key="EditButtonBorderColor">#85B7EB</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="DeleteButtonColor">#f7dada</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonTextColor">#A32D2D</SolidColorBrush>
+                             <SolidColorBrush x:Key="DeleteButtonBorderColor">#F09595</SolidColorBrush>
+                             
+                             <SolidColorBrush x:Key="SaveButtonColor">#daf7e8</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonTextColor">#3B6D11</SolidColorBrush>
+                             <SolidColorBrush x:Key="SaveButtonBorderColor">#97C459</SolidColorBrush>
+
+                             <SolidColorBrush x:Key="CancelButtonColor">#f0f0f0</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonTextColor">#5F5E5A</SolidColorBrush>
+                             <SolidColorBrush x:Key="CancelButtonBorderColor">#D3D1C7</SolidColorBrush>
+                         </ResourceDictionary>
+                     </ResourceDictionary.ThemeDictionaries>
+                 </ResourceDictionary>
+             </Application.Resources>
+    <Application.Styles>
+        <FluentTheme />
+        
+        <StyleInclude Source="avares://AvaloniaEdit/Themes/Fluent/AvaloniaEdit.xaml" />
+    </Application.Styles>
+</Application>

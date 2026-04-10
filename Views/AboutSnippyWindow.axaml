@@ -1,0 +1,69 @@
+<!-- Copyright (C) 2026 sarp_03 -->
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="420" d:DesignHeight="480" CanResize="False" Width="420" Height="480" Icon="/Assets/Images/Desktop-icon.ico"
+        x:Class="Snippy.Views.AboutSnippyWindow"
+        Title="About Snippy">
+    <Border Background="{DynamicResource BackgroundColor}" Padding="24">
+        <StackPanel Spacing="20">
+            
+            <StackPanel HorizontalAlignment="Center" Spacing="4">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Spacing="10">
+                    <Image Source="{SvgImage /Assets/Images/Logo-Long.svg}" Width="32" Height="32"/>
+                    <TextBlock Text="Snippy" FontSize="22" FontWeight="Medium"
+                               VerticalAlignment="Center"
+                               Foreground="{DynamicResource PrimaryTextColor}"/>
+                </StackPanel>
+                <TextBlock Text="Version 1.0.0 · GPL v3"
+                           FontSize="12" HorizontalAlignment="Center"
+                           Foreground="{DynamicResource SecondaryTextColor}"/>
+            </StackPanel>
+            
+            <Border Background="{DynamicResource CardBackgroundColor}"
+                    CornerRadius="10" Padding="14">
+                <TextBlock TextWrapping="Wrap" FontSize="13" LineHeight="22"
+                           Foreground="{DynamicResource PrimaryTextColor}"
+                           Text="Snippy is an open-source desktop app for managing and running shell script snippets on your SSH servers — built by a student who loves homelabbing and tinkering with servers."/>
+            </Border>
+            
+            <Grid ColumnDefinitions="*,8,*">
+                <Border Grid.Column="0" Background="{DynamicResource CardBackgroundColor}"
+                        CornerRadius="8" Padding="12">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="BUILT WITH" FontSize="10" LetterSpacing="1"
+                                   Foreground="{DynamicResource SecondaryTextColor}"/>
+                        <TextBlock Text="C# · Avalonia UI" FontSize="13" FontWeight="Medium"
+                                   Foreground="{DynamicResource PrimaryTextColor}"/>
+                    </StackPanel>
+                </Border>
+                <Border Grid.Column="2" Background="{DynamicResource CardBackgroundColor}"
+                        CornerRadius="8" Padding="12">
+                    <StackPanel Spacing="4">
+                        <TextBlock Text="PLATFORM" FontSize="10" LetterSpacing="1"
+                                   Foreground="{DynamicResource SecondaryTextColor}"/>
+                        <TextBlock Text="Windows · Linux · macOS" FontSize="13" FontWeight="Medium"
+                                   Foreground="{DynamicResource PrimaryTextColor}"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+            
+            <StackPanel Spacing="8">
+                <Button Content="⭐  Star on GitHub"
+                        Click="StarOnGithubButton_OnClick"
+                        HorizontalAlignment="Stretch"/>
+                <Button Content="🐛  Report an issue"
+                        Click="ReportIssueButton_OnClick"
+                        HorizontalAlignment="Stretch"/>
+            </StackPanel>
+
+            <TextBlock Text="Made with ♥ by sarp_03"
+                       FontSize="12" HorizontalAlignment="Center"
+                       Foreground="{DynamicResource TertiaryTextColor}"/>
+
+        </StackPanel>
+    </Border>
+</Window>

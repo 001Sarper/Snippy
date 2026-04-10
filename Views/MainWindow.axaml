@@ -1,0 +1,65 @@
+<!-- Copyright (C) 2026 sarp_03 -->
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450" CanResize="True" Icon="/Assets/Images/Desktop-icon.ico"
+        x:Class="Snippy.MainWindow"
+        Title="Snippy">
+        <Border Background="{DynamicResource BackgroundColor}">
+               <Grid>
+                   <Grid.RowDefinitions>
+                       <RowDefinition Height="25"/>
+                       <RowDefinition Height="*"/>
+                   </Grid.RowDefinitions>
+                   <Menu Grid.Row="0" Background="{DynamicResource MenuColor}">
+                       <MenuItem Header="File">
+                           <MenuItem Header="Manage Hosts" Click="ManageHostsMenuItem_OnClick"/>
+                           <MenuItem Header="Manage Snippets" Click="ManageSnippetsMenuItem_OnClick"/>
+                           <Separator/>
+                           <MenuItem Header="Exit" Click="ExitMenuItem_OnClick"/>
+                       </MenuItem>
+                       <MenuItem Header="View">
+                           <MenuItem Header="Preferences" Click="PreferencesMenuItem_OnClick"/>
+                       </MenuItem>
+                       <MenuItem Header="Help">
+                           <MenuItem Header="About Snippy" Click="AboutSnippyMenuItem_OnClick"/>
+                           <Separator/>
+                           <MenuItem Header="GitHub" Click="OpenGithubMenuItem_OnClick"/>
+                       </MenuItem>
+                   </Menu>
+                   <Grid Grid.Row="1" x:Name="ConnectionGrid" Background="{DynamicResource BackgroundColor}">
+                       <Grid.ColumnDefinitions>
+                           <ColumnDefinition Width="*"/>
+                           <ColumnDefinition Width="Auto"/>
+                           <ColumnDefinition Width="Auto" MinWidth="0" MaxWidth="350"/>
+                       </Grid.ColumnDefinitions>
+                       
+                       <TabControl Grid.Column="0" x:Name="TabController">
+                           <TabItem Header="Snippets" FontWeight="DemiBold" FontSize="14" x:Name="SnippetHub">
+                               <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto">
+                                   <StackPanel x:Name="SnippetList" Spacing="20" Orientation="Horizontal" VerticalAlignment="Top" Margin="0,10,0,10">
+                                   
+                                   </StackPanel>
+                               </ScrollViewer>
+                           </TabItem>
+                       </TabControl>
+                       
+                       <GridSplitter x:Name="ConnectionListSplitter" IsVisible="False" Grid.Column="1" Width="5" ResizeBehavior="PreviousAndNext" ResizeDirection="Columns" />
+                       
+                       <Grid x:Name="ConnectionList" IsVisible="False" Grid.Column="2" RowDefinitions="Auto,Auto,*,Auto,Auto" Background="{DynamicResource ServerListStackPanelBackground}">
+                           <Button Grid.Row="0" HorizontalAlignment="Right" Content="✕" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="5" Click="CloseServerSelectionSection_OnClick" Height="20" Width="30" FontSize="14" Padding="-2" Background="{DynamicResource DeleteButtonColor}" BorderBrush="{DynamicResource DeleteButtonBorderColor}" Foreground="{DynamicResource DeleteButtonTextColor}"/>
+                           <Separator Grid.Row="1" />
+                           <StackPanel Grid.Row="2" x:Name="ServerSelectionSection" Spacing="10" Orientation="Vertical" HorizontalAlignment="Stretch" Margin="0,5,0,0">
+                               
+                           </StackPanel>
+                           
+                           <Separator Grid.Row="3"/>
+                           <Button Grid.Row="4" x:Name="ServerSelectionConfirmButton" Content="Confirm" Click="ConfirmServersButton_OnClick" Background="{DynamicResource ConfirmButtonColor}" BorderBrush="{DynamicResource ConfirmButtonBorderColor}" Foreground="{DynamicResource ConfirmButtonTextColor}" HorizontalAlignment="Center" VerticalAlignment="Center" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Margin="2" Height="30" Width="80"/>
+                       </Grid>
+                   </Grid>
+               </Grid> 
+        </Border>
+</Window>

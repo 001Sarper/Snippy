@@ -1,0 +1,50 @@
+<!-- Copyright (C) 2026 sarp_03 -->
+<!-- SPDX-License-Identifier: GPL-3.0-or-later -->
+
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:avaloniaEdit="clr-namespace:AvaloniaEdit;assembly=AvaloniaEdit"
+        mc:Ignorable="d" d:DesignWidth="500" d:DesignHeight="350" Width="1000" Height="600" Icon="/Assets/Images/Desktop-icon.ico"
+        x:Class="Snippy.Views.SnippetEditorWindow"
+        Title="Snippet Editor">
+    <Border Background="{DynamicResource BackgroundColor}">
+        <Grid RowDefinitions="Auto,Auto,*,Auto,Auto" Margin="16">
+            
+            <Grid Grid.Row="0" ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto" Margin="0,0,0,12">
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Name" VerticalAlignment="Center" Margin="0,0,16,8"/>
+                <TextBox Grid.Row="0" x:Name="SnippetNameTextBlock" Grid.Column="1" Margin="0,0,0,8" CornerRadius="6" Padding="8,4"/>
+        
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Author" VerticalAlignment="Center" Margin="0,0,16,8"/>
+                <TextBox Grid.Row="1" x:Name="FileAuthorTextBlock" Grid.Column="1" Margin="0,0,0,8" CornerRadius="6" Padding="8,4"/>
+        
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Description" VerticalAlignment="Center" Margin="0,0,16,0"/>
+                <TextBox Grid.Row="2" x:Name="FileDescriptionTextBlock" Grid.Column="1" CornerRadius="6" Padding="8,4"/>
+            </Grid>
+
+            <Separator Grid.Row="1" Margin="0,0,0,12"/>
+            
+            
+            <!--  Editor  -->
+            <avaloniaEdit:TextEditor Grid.Row="2"
+                                     x:Name="Editor"
+                                     ShowLineNumbers="True"
+                                     FontFamily="Cascadia Code,Consolas,Menlo,Monospace"
+                                     FontSize="13"
+                                     HorizontalScrollBarVisibility="Auto"
+                                     VerticalScrollBarVisibility="Auto"
+                                     WordWrap="True"
+                                     />
+
+            <Separator Grid.Row="3" Margin="0,12,0,12" x:Name="BottomSeparator"/>
+
+            <!-- Buttons -->
+            <Grid Grid.Row="4" ColumnDefinitions="*,Auto,Auto" x:Name="ButtonsGrid">
+                <Button Grid.Column="1" x:Name="CancelButton" Background="{DynamicResource CancelButtonColor}" BorderBrush="{DynamicResource CancelButtonBorderColor}" Foreground="{DynamicResource CancelButtonTextColor}" Content="Cancel" Padding="16,8" CornerRadius="6" Margin="0,0,8,0" Click="CancelButton_OnClick"/>
+                <Button Grid.Column="2" x:Name="SaveButton" Background="{DynamicResource SaveButtonColor}" BorderBrush="{DynamicResource SaveButtonBorderColor}" Foreground="{DynamicResource SaveButtonTextColor}" Content="Save" Padding="16,8" CornerRadius="6" Click="SaveButton_OnClick"/>
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
