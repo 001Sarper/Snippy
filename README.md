@@ -4,8 +4,6 @@
 
 Snippy lets you organize your shell scripts as reusable snippets and run them on one or multiple SSH servers simultaneously — with live output streamed directly into the app.
 
-> ⚠️ Snippy is currently in active development. No stable release yet.
-
 ---
 
 ## Features
