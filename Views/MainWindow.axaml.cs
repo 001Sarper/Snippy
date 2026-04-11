@@ -279,7 +279,7 @@ public partial class MainWindow : Window
     {
         var button = sender as Button;
         var snippet = button.Tag as Snippet;
-        SnippetEditorWindow snippetEditorWindow = new SnippetEditorWindow(false, false, snippet);
+        SnippetEditorWindow snippetEditorWindow = new SnippetEditorWindow(false, false, null, snippet);
         snippetEditorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         snippetEditorWindow.SnippetNameTextBlock.IsReadOnly = true;
         snippetEditorWindow.FileAuthorTextBlock.IsReadOnly = true;
@@ -341,7 +341,7 @@ public partial class MainWindow : Window
         
         if (_checkedServers.Count > 0)
         {
-            string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
+            string filePath = Path.Combine(_snippetFilesDirectory, snippet.ID + ".sh");
             
             foreach (var server in _checkedServers)
             {
