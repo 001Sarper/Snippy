@@ -7,6 +7,7 @@ using System.Text;
 using System.Text.Json;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Markup.Xaml.MarkupExtensions;
 using AvaloniaEdit;
 using AvaloniaEdit.TextMate;
 using TextMateSharp.Grammars;
@@ -37,7 +38,7 @@ public partial class SnippetEditorWindow : Window
     private int _snippetIndex;
     
     
-    public SnippetEditorWindow(bool isNewFile, bool isEditMode, Snippet? snippet = null, int snippetIndex = -1)
+    public SnippetEditorWindow(bool isNewFile, bool isEditMode, string? snippetContent, Snippet? snippet = null, int snippetIndex = -1)
     {
         InitializeComponent();
         
@@ -71,15 +72,23 @@ public partial class SnippetEditorWindow : Window
             FileAuthorTextBlock.Text = snippet.Author;
             FileDescriptionTextBlock.Text = snippet.Description;
 
+            string fileContent = "";
+            if(string.IsNullOrEmpty(snippetContent))
+            {
+                string filePath = Path.Combine(_snippetFilesDirectory, snippet.ID + ".sh");
+                fileContent = File.ReadAllText(filePath);
+            }
             
-            string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
-            string fileContent = File.ReadAllText(filePath);
-            
-            editor.Text = fileContent;
+            editor.Text = (!string.IsNullOrEmpty(snippetContent) ? snippetContent : fileContent);
         
             editor.IsReadOnly = !isEditMode;
 
             SaveButton.Tag = snippet;
+            SaveButton.Content = (!string.IsNullOrEmpty(snippetContent)) ? "Import" : "Save";
+            SaveButton[!BackgroundProperty] = (!string.IsNullOrEmpty(snippetContent)) ? new DynamicResourceExtension("ImportButtonColor") : new DynamicResourceExtension("SaveButtonColor");
+            SaveButton[!BorderBrushProperty] = (!string.IsNullOrEmpty(snippetContent)) ? new DynamicResourceExtension("ImportButtonBorderColor") : new DynamicResourceExtension("SaveButtonBorderColor");
+            SaveButton[!ForegroundProperty] = (!string.IsNullOrEmpty(snippetContent)) ? new DynamicResourceExtension("ImportButtonTextColor") : new DynamicResourceExtension("SaveButtonTextColor");
+            SaveButton.Click += (!string.IsNullOrEmpty(snippetContent)) ? ImportSnippet_OnClick : SaveButton_OnClick;
         }
         
     }
@@ -121,12 +130,13 @@ public partial class SnippetEditorWindow : Window
         
         if (_isNewFile && !string.IsNullOrWhiteSpace(editor.Text) && !string.IsNullOrWhiteSpace(SnippetNameTextBlock.Text) && !string.IsNullOrWhiteSpace(FileAuthorTextBlock.Text))
         {
-            string filePath = Path.Combine(_snippetFilesDirectory, SnippetNameTextBlock.Text + ".sh");
+            var snippetID = Guid.NewGuid().ToString("N")[..8];
+            
+            string filePath = Path.Combine(_snippetFilesDirectory, snippetID + ".sh");
             var box = MessageBoxManager.GetMessageBoxStandard("Success", "New Snippet was added successfully.", ButtonEnum.Ok);
             
             File.WriteAllText(filePath, editor.Text, Encoding.UTF8);
-            newSnippet.Path = SnippetNameTextBlock.Text + ".sh";
-            newSnippet.ID = Guid.NewGuid().ToString("N")[..8];
+            newSnippet.ID = snippetID;
             snippetManager.Snippets.Add(newSnippet);
             string json = JsonSerializer.Serialize(snippetManager);
             File.WriteAllText(_snippetsFilePath, json);
@@ -139,11 +149,10 @@ public partial class SnippetEditorWindow : Window
 
         } else if (!_isNewFile && _isEditMode && !string.IsNullOrWhiteSpace(editor.Text) && !string.IsNullOrWhiteSpace(SnippetNameTextBlock.Text) && !string.IsNullOrWhiteSpace(FileAuthorTextBlock.Text))
         {
-            string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
+            string filePath = Path.Combine(_snippetFilesDirectory, snippet.ID + ".sh");
             var box = MessageBoxManager.GetMessageBoxStandard("Success", "Snippet was edited successfully");
             
             File.WriteAllText(filePath, editor.Text, Encoding.UTF8);
-            newSnippet.Path = snippet.Path;
             newSnippet.ID = snippet.ID;
             snippetManager.Snippets[_snippetIndex]  = newSnippet;
             string json = JsonSerializer.Serialize(snippetManager);
@@ -173,9 +182,46 @@ public partial class SnippetEditorWindow : Window
         }
         else
         {
-            var box = MessageBoxManager.GetMessageBoxStandard("Error", "Check Snippet Name, Author or Content!",
-                ButtonEnum.Ok);
+            var box = MessageBoxManager.GetMessageBoxStandard("Error", "Check Snippet Name, Author or Content!");
             await box.ShowAsync();
         }
+    }
+
+    private async void ImportSnippet_OnClick(object? sender, RoutedEventArgs e)
+    {
+        var editor = this.FindControl<TextEditor>("Editor");
+        var button = sender as Button;
+        var snippet = button.Tag as Snippet;
+        
+        
+        SnippetManager snippetManager;
+
+        if (File.Exists(_snippetsFilePath))
+        {
+            string existing = File.ReadAllText(_snippetsFilePath);
+            snippetManager = JsonSerializer.Deserialize<SnippetManager>(existing);
+            
+        }
+        else
+        {
+            snippetManager = new SnippetManager();
+        }
+        
+        var snippetID = Guid.NewGuid().ToString("N")[..8];
+        string filePath = Path.Combine(_snippetFilesDirectory, snippetID + ".sh");
+        var box = MessageBoxManager.GetMessageBoxStandard("Success", "New Snippet was added successfully.", ButtonEnum.Ok);
+        
+        
+        File.WriteAllText(filePath, editor.Text, Encoding.UTF8);
+        snippet.ID = snippetID;
+        snippetManager.Snippets.Add(snippet);
+        string json = JsonSerializer.Serialize(snippetManager);
+        File.WriteAllText(_snippetsFilePath, json);
+        ManageSnippetsWindow.Instance.AddSnippet(snippet, _snippetIndex);
+        MainWindow.Instance.AddSnippet(snippet);
+        await box.ShowAsync();
+        Close();
+        
+        
     }
 }

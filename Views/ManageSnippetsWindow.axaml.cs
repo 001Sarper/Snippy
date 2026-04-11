@@ -7,9 +7,11 @@ using System.IO;
 using System.Text.Json;
 using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml.MarkupExtensions;
+using Avalonia.Threading;
 using MsBox.Avalonia;
 using MsBox.Avalonia.Enums;
 using Snippy.Models.Cards;
@@ -138,7 +140,7 @@ public partial class ManageSnippetsWindow : Window
         var button  = sender as Button;
         var (snippet, index) = ((Snippet, int))button.Tag;
         
-        SnippetEditorWindow editorWindow = new SnippetEditorWindow(false, true, snippet,  index);
+        SnippetEditorWindow editorWindow = new SnippetEditorWindow(false, true, null, snippet,  index);
         editorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         await editorWindow.ShowDialog(this);
     }
@@ -157,7 +159,7 @@ public partial class ManageSnippetsWindow : Window
             string json = File.ReadAllText(_snippetsFilePath);
             SnippetManager snippetManager = JsonSerializer.Deserialize<SnippetManager>(json);
             
-            string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
+            string filePath = Path.Combine(_snippetFilesDirectory, snippet.ID + ".sh");
             
             snippetManager.Snippets.RemoveAll(s => s.ID == snippet.ID);
             File.Delete(filePath);
@@ -174,8 +176,14 @@ public partial class ManageSnippetsWindow : Window
 
     private async void OpenEditor_OnClick(object? sender, RoutedEventArgs e)
     {
-        SnippetEditorWindow editorWindow = new SnippetEditorWindow(true, false);
+        SnippetEditorWindow editorWindow = new SnippetEditorWindow(true, false, null);
         editorWindow.WindowStartupLocation = WindowStartupLocation.CenterScreen;
         await editorWindow.ShowDialog(this);
+    }
+
+    private async void LoadFromURL_OnClick(object? sender, RoutedEventArgs e)
+    {
+        ImportURLWindow importWindow = new ImportURLWindow(); 
+        await importWindow.ShowDialog(this);
     }
 }
