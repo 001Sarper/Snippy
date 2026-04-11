@@ -3,10 +3,13 @@
 
 using System;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Snippy.Models.FileManagment.Config;
+using WebViewControl;
 
 namespace Snippy.Views;
 
@@ -43,6 +46,18 @@ public partial class PreferencesWindow : Window
         File.WriteAllText(_preferencesFilePath, JsonSerializer.Serialize(configManager));
 
         App.Instance.SetTheme(ThemeSelection.Text);
+        
+        if (MainWindow.Instance.TerminalList.Any())
+        {
+            bool isDark = ThemeSelection.Text ==  "Dark";
+            
+            foreach (WebView webView in MainWindow.Instance.TerminalList)
+            {
+                webView.ExecuteScript($"term.options.fontSize = {(int)FontSize.Value};");
+                webView.ExecuteScript($"setTheme({isDark.ToString().ToLower()})");
+            }
+            
+        }
         
     }
 }

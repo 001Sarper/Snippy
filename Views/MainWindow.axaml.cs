@@ -342,12 +342,12 @@ public partial class MainWindow : Window
         if (_checkedServers.Count > 0)
         {
             string filePath = Path.Combine(_snippetFilesDirectory, snippet.Path);
-            string snippetContent = File.ReadAllText(filePath);
             
             foreach (var server in _checkedServers)
             {
                 string json = File.ReadAllText(_preferencesFilePath);
                 ConfigManager configManager = JsonSerializer.Deserialize<ConfigManager>(json);
+                string snippetContent = ResolveAutomaticParameters(File.ReadAllText(filePath), server, snippet);
 
                 SSH_Tab tab = new SSH_Tab()
                 {
@@ -422,6 +422,20 @@ public partial class MainWindow : Window
             var box = MessageBoxManager.GetMessageBoxStandard("Error", "There were no servers selected!");
             await box.ShowAsync();
         }
+    }
+
+    private string ResolveAutomaticParameters(string input, ClientConnection connection, Snippet snippet)
+    {
+        var now = DateTime.Now;
+        return input
+            .Replace("{{SNIPPY_HOST}}", connection.Host)
+            .Replace("{{SNIPPY_PORT}}", connection.Port.ToString())
+            .Replace("{{SNIPPY_USER}}", connection.Username)
+            .Replace("{{SNIPPY_DATE}}", now.ToString("yyyy-MM-dd"))
+            .Replace("{{SNIPPY_TIME}}", now.ToString("HH:mm:ss"))
+            .Replace("{{SNIPPY_TIMESTAMP}}", DateTimeOffset.UtcNow.ToUnixTimeSeconds().ToString())
+            .Replace("{{SNIPPY_NAME}}", snippet.Name)
+            .Replace("{{SNIPPY_ID}}", snippet.ID);
     }
     
     private async Task ConnectSSH(ClientConnection connection, SSH_Tab connectionTab, TabItem tabItem, string snippetContent)
