@@ -13,7 +13,7 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 - **Parallel Execution** — Run a snippet on multiple servers at the same time, each with its own live output tab
 - **Live Output Streaming** — Watch your script execute in real time via an integrated terminal view
 - **Preferences** — Customize terminal font size and application theme (dark/light)
-- **Snippet Hub** *(coming soon)* — Browse and import community snippets directly from within the app
+- **Snippet Hub** — Browse and import community snippets directly from within the app with a Metadata URL
 
 ---
 ## Screenshots
@@ -41,10 +41,40 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 3. Start the 'Snippy' File
 
 **Requirements:**
-- .NET 10
 - Linux / Windows / macOS
 
 ---
+
+## Documentation
+
+### Automatic Snippet Parameters
+
+`{{SNIPPY_HOST}} - Represents the current "Host IP" on which the snippet is executed`
+
+`{{SNIPPY_PORT}} - Represents the current "Host Port" on which the snippet is executed` 
+
+`{{SNIPPY_USER}} - Represents the current "Host User" on which the snippet is executed`
+
+`{{SNIPPY_DATE}} - Represents the current Client Date in: YYYY-MM-DD e.g.: 2025-04-11`
+
+`{{SNIPPY_TIME}} - Represents the current Client Time in: HH:MM:SS e.g.: 14:32:05`
+
+`{{SNIPPY_TIMESTAMP}} - Represents the current Client Unix Timestamp. E.g.: 1744380725`
+
+`{{SNIPPY_NAME}} - Represents the snippets name`
+
+`{{SNIPPY_ID}} - Represents the snippets ID`
+
+### Snippet-Hub
+The snippet hub is a repository named [**Snippy-Hub**](https://github.com/001Sarper/Snippy-Hub). It is a community-driven hub for sharing shell script snippets for Snippy.
+If you want to use or contribute to it, follow its [**Instructions**](https://github.com/001Sarper/Snippy-Hub#how-to-use).
+
+If there are no active contributors unfortunately the repository also won't grow over time. 
+
+
+
+---
+
 
 ## Built With
 
@@ -61,7 +91,9 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 - [x] Parallel execution on multiple servers
 - [x] Live output streaming per server tab
 - [x] Preferences window
-- [ ] Snippet Hub — community snippet sharing via URL
+- [x] Snippet Hub — community snippet sharing via URL
+---
+## **Create new Feature requests under the Issues Tab**!
 
 ---
 
