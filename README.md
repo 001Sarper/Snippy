@@ -69,7 +69,7 @@ Snippy lets you organize your shell scripts as reusable snippets and run them on
 The snippet hub is a repository named [**Snippy-Hub**](https://github.com/001Sarper/Snippy-Hub). It is a community-driven hub for sharing shell script snippets for Snippy.
 If you want to use or contribute to it, follow its [**Instructions**](https://github.com/001Sarper/Snippy-Hub#how-to-use).
 
-If there are no active contributors unfortunately the repository also won't grow over time. 
+If there are no active contributors, unfortunately the repository also won't grow over time. 
 
 
 
